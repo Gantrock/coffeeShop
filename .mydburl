@@ -1,0 +1,4 @@
+Connection info string:
+   "dbname=dbkl494mtkj47u host=ec2-54-225-240-168.compute-1.amazonaws.com port=5432 user=ubhbnxclhpghno password=04de6fb628275f808cc49149b5f4e70791b64089950887e9947a56ef510d6935 sslmode=require"
+Connection URL:
+   postgres://ubhbnxclhpghno:04de6fb628275f808cc49149b5f4e70791b64089950887e9947a56ef510d6935@ec2-54-225-240-168.compute-1.amazonaws.com:5432/dbkl494mtkj47u
