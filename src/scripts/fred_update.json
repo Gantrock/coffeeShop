@@ -1,6 +1,8 @@
 {
-  "name": "Fred Beta Smith",
-  "age": 34,
-  "messages": [ "hello fred 1", "hello fred 2", "hello fred 3" ],
-  "userid": 10
+  "name": "Java Hut",
+  "address": "23 Red Road Seattle",
+  "hours": "9-5",
+  "phone": 2065551234,
+  "food": [ "burrito", "donut", "brocoli" ],
+  "shopid": 1
 }
