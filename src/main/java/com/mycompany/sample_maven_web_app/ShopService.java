@@ -51,7 +51,10 @@ public class ShopService {
     public String getShops() {
         //TODO return proper representation object
         StringBuilder sb = new StringBuilder();
-        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>USERS LIST:</b><br><br><table cellpadding=10 border=1><tr><td>Name</td><td>Age</td><td>shopid</td></tr>");
+        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;"
+                + "font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>SHOPS LIST:"
+                + "</b><br><br><table cellpadding=10 border=1><tr><td>Name</td><td>Address</td>"
+                + "<td>Hours</td><td>Phone</td><td>Food</td><td>Shop ID</td></tr>");
         try
         {
             Model db = Model.singleton();
