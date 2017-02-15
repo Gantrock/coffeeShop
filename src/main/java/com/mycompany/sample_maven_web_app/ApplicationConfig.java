@@ -10,7 +10,7 @@ import javax.ws.rs.core.Application;
 
 /**
  *
- * @author wlloyd
+ * @author nick
  */
 @javax.ws.rs.ApplicationPath("webresources")
 public class ApplicationConfig extends Application {
@@ -30,7 +30,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
 
-        resources.add(com.mycompany.sample_maven_web_app.UserService.class);
+        resources.add(com.mycompany.sample_maven_web_app.ShopService.class);
     }
     
 }

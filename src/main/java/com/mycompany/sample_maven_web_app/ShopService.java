@@ -20,18 +20,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
-import objects.User;
+import objects.Shop;
 import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  * REST Web Service
  *
- * @author wlloyd
+ * @author nick
  */
-@Path("users")
-public class UserService {
+@Path("shops")
+public class ShopService {
 
-    static final Logger logger = Logger.getLogger(UserService.class.getName());
+    static final Logger logger = Logger.getLogger(ShopService.class.getName());
     
     @Context
     private UriInfo context;
@@ -39,7 +39,7 @@ public class UserService {
     /**
      * Creates a new instance of GenericResource
      */
-    public UserService() {
+    public ShopService() {
     }
 
     /**
@@ -48,20 +48,23 @@ public class UserService {
      */
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public String getUsers() {
+    public String getShops() {
         //TODO return proper representation object
         StringBuilder sb = new StringBuilder();
-        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>USERS LIST:</b><br><br><table cellpadding=10 border=1><tr><td>Name</td><td>Age</td><td>userid</td></tr>");
+        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>USERS LIST:</b><br><br><table cellpadding=10 border=1><tr><td>Name</td><td>Age</td><td>shopid</td></tr>");
         try
         {
             Model db = Model.singleton();
-            User[] users = db.getUsers();
-            for (int i=0;i<users.length;i++)
-                sb.append("<tr><td>" + users[i].getName() + "</td><td>" + users[i].getAge() + "</td><td>" + users[i].getUserid() + "</td></tr>");
+            Shop[] shops = db.getShops();
+            for (int i=0;i<shops.length;i++)
+                sb.append("<tr><td>" + shops[i].getName() + "</td><td>" + shops[i].getAddress()
+                        + "</td><td>" + shops[i].getHours() + "</td><td>" + shops[i].getPhone()
+                        + "</td><td>" + shops[i].getFood() + "</td><td>" + shops[i].getShopId()
+                        + "</td></tr>");
         }
         catch (Exception e)
         {
-            sb.append("</table><br>Error getting users: " + e.toString() + "<br>");
+            sb.append("</table><br>Error getting shops: " + e.toString() + "<br>");
         }
         sb.append("</table></body></html>");
         return sb.toString();
@@ -74,21 +77,21 @@ public class UserService {
     @PUT
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String updateUser(String jobj) throws IOException
+    public String updateShop(String jobj) throws IOException
     {
         ObjectMapper mapper = new ObjectMapper();
-        User user = mapper.readValue(jobj.toString(), User.class);
+        Shop shop = mapper.readValue(jobj.toString(), Shop.class);
         StringBuilder text = new StringBuilder();
         try {
             Model db = Model.singleton();
-            int userid = user.getUserid();
-            db.updateUser(user);
-            logger.log(Level.INFO, "update user with userid=" + userid);
-            text.append("User id updated with user id=" + userid + "\n");
+            int shopid = shop.getShopId();
+            db.updateShop(shop);
+            logger.log(Level.INFO, "update shop with shopid=" + shopid);
+            text.append("Shop id updated with shop id=" + shopid + "\n");
         }
         catch (SQLException sqle)
         {
-            String errText = "Error updating user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error updating shop after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         }
@@ -103,21 +106,21 @@ public class UserService {
     @DELETE
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String deleteUser(String jobj) throws IOException
+    public String deleteShop(String jobj) throws IOException
     {
         ObjectMapper mapper = new ObjectMapper();
-        User user = mapper.readValue(jobj.toString(), User.class);
+        Shop shop = mapper.readValue(jobj.toString(), Shop.class);
         StringBuilder text = new StringBuilder();
         try {
             Model db = Model.singleton();
-            int userid = user.getUserid();
-            db.deleteUser(userid);
-            logger.log(Level.INFO, "user deleted from db=" + userid);
-            text.append("User id deleted with id=" + userid);
+            int shopid = shop.getShopId();
+            db.deleteShop(shopid);
+            logger.log(Level.INFO, "shop deleted from db=" + shopid);
+            text.append("Shop id deleted with id=" + shopid);
         }
         catch (SQLException sqle)
         {
-            String errText = "Error deleteing user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error deleteing shop after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         }
@@ -132,27 +135,29 @@ public class UserService {
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String createUser(String jobj) throws IOException {
+    public String createShop(String jobj) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        User user = mapper.readValue(jobj.toString(), User.class);
+        Shop shop = mapper.readValue(jobj.toString(), Shop.class);
         
         StringBuilder text = new StringBuilder();
         text.append("The JSON obj:" + jobj.toString() + "\n");
-        text.append("Hello " + user.getName() + "\n");
-        text.append("You're only " + user.getAge() + " years old.\n");
-        text.append("Messages:\n");
-        for (Object msg : user.getMessages())
-            text.append(msg.toString() + "\n");
+        text.append("Shop:" + shop.getName() + "\n");
+        text.append("Address:" + shop.getAddress() + "\n");
+        text.append("Hours:" + shop.getHours() + "\n");
+        text.append("Phone:" + shop.getPhone() + "\n");
+        text.append("Foods:\n");
+        for (Object food : shop.getFood())
+            text.append(food.toString() + "\n");
         
         try {
             Model db = Model.singleton();
-            int userid = db.newUser(user);
-            logger.log(Level.INFO, "user persisted to db as userid=" + userid);
-            text.append("User id persisted with id=" + userid);
+            int shopid = db.newShop(shop);
+            logger.log(Level.INFO, "shop persisted to db as shopid=" + shopid);
+            text.append("Shop id persisted with id=" + shopid);
         }
         catch (SQLException sqle)
         {
-            String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error persisting shop after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         }
