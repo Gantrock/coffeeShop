@@ -1,0 +1,7 @@
+{
+  "name": "Java Now",
+  "address": "33 Rabbit Road Seattle",
+  "hours": "11-11",
+  "phone": 2065551111,
+  "food": [ "pizza", "spaghetti", "stromboli" ]
+}

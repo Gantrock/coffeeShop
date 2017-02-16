@@ -1,0 +1,7 @@
+{
+  "name": "Java Box",
+  "address": "42 Winding Way Seattle",
+  "hours": "5-9",
+  "phone": 2065552334,
+  "food": [ "bubbles", "water", "gooey stuff" ]
+}

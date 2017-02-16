@@ -1,0 +1,7 @@
+{
+  "name": "Java World",
+  "address": "5 Buick Lane Seattle",
+  "hours": "8-9",
+  "phone": 2065554321,
+  "food": [ "lettuce", "lollipop", "bread" ]
+}

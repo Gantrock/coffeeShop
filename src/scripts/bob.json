@@ -1,0 +1,7 @@
+{
+  "name": "Java Max",
+  "address": "7 Owl Road Seattle",
+  "hours": "24-7",
+  "phone": 2065551337,
+  "food": [ "squash", "dough", "potato" ]
+}
