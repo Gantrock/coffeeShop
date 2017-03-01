@@ -14,11 +14,16 @@ import java.util.List;
 public class Shop {
 
     private String name;
-    private String address;
-    private String hours;
-    private int phone;
-    private List<String> food;
-    private int shopid;
+    private String city;
+    private String state;
+    private long zip;
+    private long phone;
+    private int openTime;
+    private int closeTime;
+    private String description;
+    private Key value;
+    //private List<String> food;
+    //private int shopid;
 
     public String getName() {
         return name;
@@ -28,23 +33,30 @@ public class Shop {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCity() {
+        return city;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getHours() {
-        return hours;
+    public String getState() {
+        return city;   
+    }
+    
+    public void setState() {
+        this.state = state;   
     }
 
-    public void setHours(String hours) {
-        this.hours = hours;
+    public long getZip() {
+        return phone;
     }
 
-    public int getPhone() {
+    public void setZip(int zip) {
+        this.zip = zip;
+    }
+    public long getPhone() {
         return phone;
     }
 
@@ -52,6 +64,7 @@ public class Shop {
         this.phone = phone;
     }
 
+    /*
     public List<String> getFood() {
         return food;
     }
@@ -59,13 +72,37 @@ public class Shop {
     public void setFood(List<String> food) {
         this.food = food;
     }
-
-    public int getShopId() {
-        return shopid;
+*/
+    public int getOpen() {
+        return openTime;
     }
 
-    public void setShopId(int shopid) {
-        this.shopid = shopid;
+    public void setOpen(int openTime) {
+        this.openTime = openTime;
+    }
+    
+    public int getClose() {
+        return closeTime;
+    }
+
+    public void setClose(int closeTime) {
+        this.closeTime = closeTime;
+    }
+    
+    public String description() {
+        return description;
+    }
+
+    public void setDescription(String decription) {
+        this.description = description;
+    }
+    
+    public Key getValue() {
+        return value;
+    }
+
+    public void seValue(Key value) {
+        this.value = value;
     }
     
     
