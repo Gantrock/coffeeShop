@@ -4,5 +4,5 @@
   "hours": "9-5",
   "phone": 2065551234,
   "food": [ "burrito", "donut", "brocoli" ],
-  "shopid": 1
+  "shopId": 1
 }
