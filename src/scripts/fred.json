@@ -4,7 +4,7 @@
   "state": "Worst State",
   "zip": 63790,
   "phone": 8205309,
-  "opentime": 1300,
-  "closetime": 1400,
+  "open": 1300,
+  "close": 1400,
   "description": "This shop is the worst"
 }
