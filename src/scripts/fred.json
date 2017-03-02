@@ -1,7 +1,10 @@
 {
-  "name": "Java Hut",
-  "address": "23 Red Road Seattle",
-  "hours": "9-5",
-  "phone": 2065551234,
-  "food": [ "burrito", "donut", "brocoli" ]
+  "name": "Worst Coffee",
+  "city": "Worst City",
+  "state": "Worst State",
+  "zip": 63790,
+  "phone": 8205309,
+  "openTime": 1300,
+  "closeTime": 1400,
+  "description": "This shop is the worst"
 }

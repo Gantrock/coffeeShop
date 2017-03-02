@@ -1,7 +1,10 @@
 {
-  "name": "Java Box",
-  "address": "42 Winding Way Seattle",
-  "hours": "5-9",
-  "phone": 2065552334,
-  "food": [ "bubbles", "water", "gooey stuff" ]
+  "name": "Starbucks",
+  "city": "Portland",
+  "state": "Oregon",
+  "zip": 98154,
+  "phone": 2061337,
+  "openTime": 0900,
+  "closeTime": 1800,
+  "description": "This is an oregon starbucks"
 }

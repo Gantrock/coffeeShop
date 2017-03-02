@@ -1,7 +1,10 @@
 {
-  "name": "Java Now",
-  "address": "33 Rabbit Road Seattle",
-  "hours": "11-11",
-  "phone": 2065551111,
-  "food": [ "pizza", "spaghetti", "stromboli" ]
+  "name": "Not-Starbucks",
+  "city": "Not Walla Walla",
+  "state": "Not Washington",
+  "zip": 22222,
+  "phone": 1010101,
+  "openTime": 0001,
+  "closeTime": 1000,
+  "description": "This is not a starbucks"
 }

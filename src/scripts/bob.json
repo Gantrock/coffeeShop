@@ -1,7 +1,10 @@
 {
-  "name": "Java Max",
-  "address": "7 Owl Road Seattle",
-  "hours": "24-7",
-  "phone": 2065551337,
-  "food": [ "squash", "dough", "potato" ]
+  "name": "Sunbucks",
+  "city": "Wacka Wacka",
+  "state": "Washington",
+  "zip": 54321,
+  "phone": 5555555,
+  "openTime": 1337,
+  "closeTime": 2100,
+  "description": "A starbucks ripoff"
 }

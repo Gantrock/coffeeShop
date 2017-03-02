@@ -1,7 +1,10 @@
 {
   "name": "Java World",
-  "address": "5 Buick Lane Seattle",
-  "hours": "8-9",
-  "phone": 2065554321,
-  "food": [ "lettuce", "lollipop", "bread" ]
+  "city": "Walla Walla",
+  "state": "Washington",
+  "zip": 12345,
+  "phone": 8675309,
+  "openTime": 0000,
+  "closeTime": 2400,
+  "description": "This place is better than starbucks"
 }
