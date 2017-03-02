@@ -85,10 +85,12 @@ public class Model {
     
     public int newShop(Shop shp) throws SQLException
     {
-        String sqlInsert="insert into shops (name, address, hours, phone, food) values ('"
-                + shp.getName() + "'" + "," + "'" + shp.getAddress() + "'" + "," 
-                + "'" + shp.getHours() + "'" + "," + "'" + shp.getPhone()
-                + "'" + "," + "'" + shp.getFood() + "'" + ");";
+        String sqlInsert="insert into shops (name, city, state, zip, phone, open, close, desc, value, shopid) values ('"
+                + shp.getName() + "'" + "," + "'" + shp.getCity() + "'" 
+                + "," + "'" + shp.getCity() + "'" + "," + "'" + shp.getState() 
+                + "'" + "," + "'" + shp.getZip()  +"'" + "," + "'" + shp.getPhone()
+                +"'" + "," + "'" + shp.getOpen() + "-" + shp.getClose()  
+                +"'" + "," + "'" + shp.getDescription()   +"'" + "," + "'" + shp.getShopId();
         Statement s = createStatement();
         logger.log(Level.INFO, "attempting statement execute");
         s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
@@ -112,7 +114,7 @@ public class Model {
     
     public Shop[] getShops() throws SQLException
     {
-        LinkedList<Shop> ll = new LinkedList<Shop>();
+        LinkedList<Shop> ll = new LinkedList<>();
         String sqlQuery ="select * from shops;";
         Statement st = createStatement();
         ResultSet rows = st.executeQuery(sqlQuery);
@@ -122,9 +124,13 @@ public class Model {
             Shop shp = new Shop();
             shp.setName(rows.getString("name"));
             shp.setShopId(rows.getInt("shopid"));
-            shp.setAddress(rows.getString("address"));
-            shp.setHours(rows.getString("hours"));
+            shp.setCity(rows.getString("city"));
+            shp.setState(rows.getString("state"));
+            shp.setZip(rows.getInt("zip"));
             shp.setPhone(rows.getInt("phone"));
+            shp.setOpen(rows.getInt("openTime"));
+            shp.setClose(rows.getInt("closeTime"));
+            shp.setDescription(rows.getString("description"));
             logger.log(Level.INFO, "Adding shop to list with id=" + shp.getShopId());
             ll.add(shp);
         }
@@ -136,9 +142,13 @@ public class Model {
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("update shops ");
         sqlQuery.append("set name='" + shp.getName() + "', ");
-        sqlQuery.append("address='" + shp.getAddress() + "',");
-        sqlQuery.append("hours='" + shp.getHours() + "',");
-        sqlQuery.append("phone='" + shp.getHours() + "' ");
+        sqlQuery.append("city=" + shp.getCity() + " ");
+        sqlQuery.append("state=" + shp.getState() + " ");
+        sqlQuery.append("zip=" + shp.getZip() + " ");
+        sqlQuery.append("phone=" + shp.getPhone() + " ");
+        sqlQuery.append("open=" + shp.getOpen() + " ");
+        sqlQuery.append("close=" + shp.getClose() + " ");
+        sqlQuery.append("description=" + shp.getDescription() + " ");
         sqlQuery.append("where shopid=" + shp.getShopId() + ";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());

@@ -21,8 +21,13 @@ public class Shop {
     private int openTime;
     private int closeTime;
     private String description;
+
   
     private int shopId;
+
+    
+    private int shopid;
+
 
     public String getName() {
         return name;
@@ -80,20 +85,20 @@ public class Shop {
         this.closeTime = closeTime;
     }
     
-    public String description() {
-        return description;
-    }
 
     public void setDescription(String decription) {
         this.description = description;
     }
     
-    
-    public int getId() {
+    public String getDescription() {
+        return description;
+    }
+
+    public int getShopId() {
         return shopId;
     }
 
-    public void setId(int shopId) {
+    public void setShopId(int shopId) {
         this.shopId = shopId;
     }
     

@@ -10,10 +10,13 @@
 
 create table shops (
     name varchar(40),
-    address varchar(40),
-    hours varchar(30),
-    phone char(10),
-    food varchar(200),
+    ciy varchar(40),
+    state varchar(40),
+    zip long,
+    phone long,
+    openTime integer,
+    closeTime integer,
+    description varchar(200),
     shopid serial primary key
 );
 
