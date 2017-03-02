@@ -145,13 +145,13 @@ public class ShopService {
         StringBuilder text = new StringBuilder();
         text.append("The JSON obj:" + jobj.toString() + "\n");
         text.append("Shop:" + shop.getName() + "\n");
-        text.append("Address:" + shop.getAddress() + "\n");
-        text.append("Hours:" + shop.getHours() + "\n");
-        text.append("Phone:" + shop.getPhone() + "\n");
-        text.append("Foods:\n");
-        for (Object food : shop.getFood())
-            text.append(food.toString() + "\n");
-        
+        text.append("City:" + shop.getCity() + "\n");
+        text.append("State:" + shop.getState() + "\n");
+        text.append("Zip:" + shop.getZip() + "\n");
+        text.append("Phone:" +shop.getPhone() + "\n");
+        text.append("Open:" +shop.getOpen() + "\n");
+        text.append("Close:" +shop.getClose() + "\n");
+        text.append("Description:" +shop.getDescription() + "\n");
         try {
             Model db = Model.singleton();
             int shopid = db.newShop(shop);

@@ -10,7 +10,7 @@
 
 create table shops (
     name varchar(40),
-    ciy varchar(40),
+    city varchar(40),
     state varchar(40),
     zip long,
     phone long,
