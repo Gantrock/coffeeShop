@@ -1,8 +1,11 @@
 {
   "name": "Java Hut",
-  "address": "23 Red Road Seattle",
-  "hours": "9-5",
+  "city": "23 Red Road Seattle",
+  "state": "9-5",
+  "zip": 90210,
   "phone": 2065551234,
-  "food": [ "burrito", "donut", "brocoli" ],
+  "openTime": 0700,
+  "closeTime": 1700,
+  "description": "wow this place is amazing",
   "shopId": 1
 }
