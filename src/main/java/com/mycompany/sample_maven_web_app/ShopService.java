@@ -60,10 +60,11 @@ public class ShopService {
             Model db = Model.singleton();
             Shop[] shops = db.getShops();
             for (int i=0;i<shops.length;i++)
-                sb.append("<tr><td>" + shops[i].getName() + "</td><td>" + shops[i].getAddress()
-                        + "</td><td>" + shops[i].getHours() + "</td><td>" + shops[i].getPhone()
-                        + "</td><td>" + shops[i].getFood() + "</td><td>" + shops[i].getShopId()
-                        + "</td></tr>");
+                sb.append("<tr><td>" + shops[i].getName() + "</td><td>" + shops[i].getCity() 
+                		+ "</td><td>" + shops[i].getState()  + "</td><td>" + shops[i].getZip()
+                		+ "</td><td>" + shops[i].getPhone()  + "</td><td>" + shops[i].getOpen()
+                		+ "</td><td>" + shops[i].getClose()  + "</td><td>" + shops[i].getDescription()
+                		 + "</td><td>" + shops[i].getShopId());
         }
         catch (Exception e)
         {
