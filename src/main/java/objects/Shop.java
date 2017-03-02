@@ -23,7 +23,7 @@ public class Shop {
     private String description;
     private Key value;
     //private List<String> food;
-    //private int shopid;
+    private int shopid;
 
     public String getName() {
         return name;
@@ -103,6 +103,14 @@ public class Shop {
 
     public void seValue(Key value) {
         this.value = value;
+    }
+    
+    public int getId() {
+        return shopId;
+    }
+
+    public void setId(int shopId) {
+        this.shopId = shopId;
     }
     
     
