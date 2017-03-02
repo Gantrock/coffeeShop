@@ -21,10 +21,6 @@ public class Shop {
     private int openTime;
     private int closeTime;
     private String description;
-
-  
-    private int shopId;
-
     
     private int shopid;
 
@@ -46,7 +42,7 @@ public class Shop {
     }
 
     public String getState() {
-        return city;   
+        return state;   
     }
     
     public void setState(String state) {
@@ -54,7 +50,7 @@ public class Shop {
     }
 
     public long getZip() {
-        return phone;
+        return zip;
     }
 
     public void setZip(int zip) {
@@ -95,11 +91,11 @@ public class Shop {
     }
 
     public int getShopId() {
-        return shopId;
+        return shopid;
     }
 
     public void setShopId(int shopId) {
-        this.shopId = shopId;
+        this.shopid = shopId;
     }
     
     
