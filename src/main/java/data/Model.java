@@ -136,9 +136,9 @@ public class Model {
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("update shops ");
         sqlQuery.append("set name='" + shp.getName() + "', ");
-        sqlQuery.append("address=" + shp.getAddress() + " ");
-        sqlQuery.append("hours=" + shp.getHours() + " ");
-        sqlQuery.append("phone=" + shp.getHours() + " ");
+        sqlQuery.append("address='" + shp.getAddress() + "',");
+        sqlQuery.append("hours='" + shp.getHours() + "',");
+        sqlQuery.append("phone='" + shp.getHours() + "' ");
         sqlQuery.append("where shopid=" + shp.getShopId() + ";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
