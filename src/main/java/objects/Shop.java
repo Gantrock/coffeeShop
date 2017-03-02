@@ -21,9 +21,8 @@ public class Shop {
     private int openTime;
     private int closeTime;
     private String description;
-    private Key value;
-    //private List<String> food;
-    private int shopid;
+  
+    private int shopId;
 
     public String getName() {
         return name;
@@ -45,7 +44,7 @@ public class Shop {
         return city;   
     }
     
-    public void setState() {
+    public void setState(String state) {
         this.state = state;   
     }
 
@@ -64,15 +63,7 @@ public class Shop {
         this.phone = phone;
     }
 
-    /*
-    public List<String> getFood() {
-        return food;
-    }
-
-    public void setFood(List<String> food) {
-        this.food = food;
-    }
-*/
+    
     public int getOpen() {
         return openTime;
     }
@@ -97,13 +88,6 @@ public class Shop {
         this.description = description;
     }
     
-    public Key getValue() {
-        return value;
-    }
-
-    public void seValue(Key value) {
-        this.value = value;
-    }
     
     public int getId() {
         return shopId;
