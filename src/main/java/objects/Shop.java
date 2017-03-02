@@ -21,7 +21,6 @@ public class Shop {
     private int openTime;
     private int closeTime;
     private String description;
-    private Key value;
     //private List<String> food;
     private int shopid;
 
@@ -95,14 +94,6 @@ public class Shop {
 
     public void setDescription(String decription) {
         this.description = description;
-    }
-    
-    public Key getValue() {
-        return value;
-    }
-
-    public void seValue(Key value) {
-        this.value = value;
     }
     
     public int getId() {
