@@ -85,7 +85,7 @@ public class Model {
     
     public int newShop(Shop shp) throws SQLException
     {
-        String sqlInsert="insert into shops (name, city, state, zip, phone, open, close, desc, value, shopid) values ('"
+        String sqlInsert="insert into shops (name, city, state, zip, phone, open, close, description, value, shopid) values ('"
                 + shp.getName() + "'" + "," + "'" + shp.getCity() + "'" 
                 + "," + "'" + shp.getCity() + "'" + "," + "'" + shp.getState() 
                 + "'" + "," + "'" + shp.getZip()  +"'" + "," + "'" + shp.getPhone()
