@@ -82,7 +82,7 @@ public class Shop {
     }
     
 
-    public void setDescription(String decription) {
+    public void setDescription(String description) {
         this.description = description;
     }
     
