@@ -19,6 +19,7 @@ public class Review {
     private int myCoffee;
     private int myFood;
     private int myStudy;
+    private int myReviewId;
 
     /**
      * @return the myContent
@@ -116,6 +117,20 @@ public class Review {
      */
     public void setMyStudy(int myStudy) {
         this.myStudy = myStudy;
+    }
+
+    /**
+     * @return the myReviewId
+     */
+    public int getMyReviewId() {
+        return myReviewId;
+    }
+
+    /**
+     * @param myReviewId the myReviewId to set
+     */
+    public void setMyReviewId(int myReviewId) {
+        this.myReviewId = myReviewId;
     }
    
 
