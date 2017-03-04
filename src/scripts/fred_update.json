@@ -4,8 +4,8 @@
   "state": "9-5",
   "zip": 90210,
   "phone": 2065551234,
-  "openTime": 0700,
-  "closeTime": 1700,
+  "open": 1700,
+  "close": 1700,
   "description": "wow this place is amazing",
   "shopId": 1
 }

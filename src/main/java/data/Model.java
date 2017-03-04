@@ -85,12 +85,11 @@ public class Model {
     
     public int newShop(Shop shp) throws SQLException
     {
-        String sqlInsert="insert into shops (name, city, state, zip, phone, open, close, description, value, shopid) values ('"
-                + shp.getName() + "'" + "," + "'" + shp.getCity() + "'" 
-                + "," + "'" + shp.getCity() + "'" + "," + "'" + shp.getState() 
-                + "'" + "," + "'" + shp.getZip()  +"'" + "," + "'" + shp.getPhone()
-                +"'" + "," + "'" + shp.getOpen() + "-" + shp.getClose()  
-                +"'" + "," + "'" + shp.getDescription()   +"'" + "," + "'" + shp.getShopId();
+        String sqlInsert="insert into shops (name, city, state, zip, phone, openTime, closeTime, description) values ('"
+                + shp.getName() + "','" + shp.getCity() + "','" + shp.getState() 
+                + "','" + shp.getZip()  +"','" + shp.getPhone()
+                +"','" + shp.getOpen() + "','" + shp.getClose()  
+                +"','" + shp.getDescription()+ "');";
         Statement s = createStatement();
         logger.log(Level.INFO, "attempting statement execute");
         s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
@@ -99,7 +98,7 @@ public class Model {
         logger.log(Level.INFO, "retrieved keys from statement");
         int shopid = -1;
         while (rs.next())
-            shopid = rs.getInt(6);   // assuming 6th column is shopid
+            shopid = rs.getInt(9);   // assuming 9th column is shopid
         logger.log(Level.INFO, "The new shop id=" + shopid);
         return shopid;
     }
@@ -142,13 +141,13 @@ public class Model {
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("update shops ");
         sqlQuery.append("set name='" + shp.getName() + "', ");
-        sqlQuery.append("city=" + shp.getCity() + " ");
-        sqlQuery.append("state=" + shp.getState() + " ");
-        sqlQuery.append("zip=" + shp.getZip() + " ");
-        sqlQuery.append("phone=" + shp.getPhone() + " ");
-        sqlQuery.append("open=" + shp.getOpen() + " ");
-        sqlQuery.append("close=" + shp.getClose() + " ");
-        sqlQuery.append("description=" + shp.getDescription() + " ");
+        sqlQuery.append("city='" + shp.getCity() + "',");
+        sqlQuery.append("state='" + shp.getState() + "',");
+        sqlQuery.append("zip=" + shp.getZip() + ",");
+        sqlQuery.append("phone=" + shp.getPhone() + ",");
+        sqlQuery.append("openTime=" + shp.getOpen() + ",");
+        sqlQuery.append("closeTime=" + shp.getClose() + ",");
+        sqlQuery.append("description='" + shp.getDescription() + "' ");
         sqlQuery.append("where shopid=" + shp.getShopId() + ";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());

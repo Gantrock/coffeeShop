@@ -20,4 +20,15 @@ create table shops (
     shopid serial primary key
 );
 
+create table reviews (
+    myContent varchar(500),
+    myDate date,
+    shopid integer,
+    myWifi integer,
+    myCoffee integer,
+    myFood integer,
+    myStudy integer,
+    reviewid serial primary key
+);
+
 
