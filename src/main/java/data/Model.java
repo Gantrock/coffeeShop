@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import objects.Shop;
+import objects.Review;
 
 /**
  *
@@ -155,4 +156,73 @@ public class Model {
     }
     
     
+    
+    
+    public int newReview(Review rvw) throws SQLException
+    {
+        String sqlInsert="insert into reviews (content, date, shopid, wifi, coffee, food, study) values ('"
+                + rvw.getMyContent() + "','" + rvw.getMyDate()+ "','" + rvw.getShopId()
+                + "','" + rvw.getMyWifi()  +"','" + rvw.getMyCoffee()
+                +"','" + rvw.getMyFood() + "','" + rvw.getMyStudy() + "');";
+        Statement s = createStatement();
+        logger.log(Level.INFO, "attempting statement execute");
+        s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
+        logger.log(Level.INFO, "statement executed.  atempting get generated keys");
+        ResultSet rs = s.getGeneratedKeys();
+        logger.log(Level.INFO, "retrieved keys from statement");
+        int reviewid = -1;
+        while (rs.next())
+            reviewid = rs.getInt(8);   // assuming 8th column is reviewid
+        logger.log(Level.INFO, "The new review id=" + reviewid);
+        return reviewid;
+    }
+    
+    public void deleteReview(int reviewid) throws SQLException
+    {
+        String sqlDelete="delete from reviews where reviewid=?";
+        PreparedStatement pst = createPreparedStatement(sqlDelete);
+        pst.setInt(1, reviewid);
+        pst.execute();
+    }
+    
+    public Review[] getReviews() throws SQLException
+    {
+        LinkedList<Review> ll = new LinkedList<>();
+        String sqlQuery ="select * from reviews;";
+        Statement st = createStatement();
+        ResultSet rows = st.executeQuery(sqlQuery);
+        while (rows.next())
+        {
+            logger.log(Level.INFO, "Reading row...");
+            Review shp = new Review();
+            shp.setMyContent(rows.getString("content"));
+            shp.setMyDate(rows.getDate("date"));
+            shp.setShopId(rows.getInt("shopid"));
+            shp.setMyWifi(rows.getInt("wifi"));
+            shp.setMyCoffee(rows.getInt("coffee"));
+            shp.setMyFood(rows.getInt("food"));
+            shp.setMyStudy(rows.getInt("study"));
+            shp.setMyReviewId(rows.getInt("reviewid"));;
+            logger.log(Level.INFO, "Adding review to list with id=" + shp.getMyReviewId());
+            ll.add(shp);
+        }
+        return ll.toArray(new Review[ll.size()]);
+    }
+    
+    public boolean updateReview(Review shp) throws SQLException
+    {
+        StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("update reviews ");
+        sqlQuery.append("set content='" + shp.getMyContent() + "', ");
+        sqlQuery.append("date='" + shp.getMyDate() + "',");
+        sqlQuery.append("shopid='" + shp.getShopId() + "',");
+        sqlQuery.append("wifi=" + shp.getMyWifi() + ",");
+        sqlQuery.append("food=" + shp.getMyCoffee() + ",");
+        sqlQuery.append("food=" + shp.getMyFood() + ",");
+        sqlQuery.append("study=" + shp.getMyStudy() + " ");
+        sqlQuery.append("where reviewid=" + shp.getMyReviewId() + ";");
+        Statement st = createStatement();
+        logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
+        return st.execute(sqlQuery.toString());
+    }
 }

@@ -52,14 +52,14 @@ public class Review {
     /**
      * @return the shopid
      */
-    public int getShopid() {
+    public int getShopId() {
         return shopid;
     }
 
     /**
      * @param shopid the shopid to set
      */
-    public void setShopid(int shopid) {
+    public void setShopId(int shopid) {
         this.shopid = shopid;
     }
 
