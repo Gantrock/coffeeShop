@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.coffeeshop;
+package com.mycompany.sample_maven_web_app;
 
 import data.Model;
 import javax.ws.rs.core.Context;
@@ -20,7 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
-import objects.Shop;
+import objects.Review;
 import org.codehaus.jackson.map.ObjectMapper;
 
 /**
@@ -28,10 +28,10 @@ import org.codehaus.jackson.map.ObjectMapper;
  *
  * @author nick
  */
-@Path("shops")
-public class ShopService {
+@Path("reviews")
+public class ReviewService {
 
-    static final Logger logger = Logger.getLogger(ShopService.class.getName());
+    static final Logger logger = Logger.getLogger(ReviewService.class.getName());
     
     @Context
     private UriInfo context;
@@ -39,7 +39,7 @@ public class ShopService {
     /**
      * Creates a new instance of GenericResource
      */
-    public ShopService() {
+    public ReviewService() {
     }
 
     /**
@@ -48,28 +48,27 @@ public class ShopService {
      */
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public String getShops() {
+    public String getReviews() {
         //TODO return proper representation object
         StringBuilder sb = new StringBuilder();
         sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;"
-                + "font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>SHOPS LIST:"
-                + "</b><br><br><table cellpadding=10 border=1><tr><td>Name</td><td>City</td>"
-                + "<td>State</td><td>Zip</td><td>Phone</td><td>Open</td><td>Close</td>"
-                + "<td>Description</td><td>Shop ID</td></tr>");
+                + "font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>REVIEWS LIST:"
+                + "</b><br><br><table cellpadding=10 border=1><tr><td>Content</td><td>Date</td>"
+                + "<td>Shop ID</td><td>Wifi</td><td>Coffee</td><td>Food</td><td>Study</td>"
+                + "<td>Review ID</td></tr>");
         try
         {
             Model db = Model.singleton();
-            Shop[] shops = db.getShops();
-            for (int i=0;i<shops.length;i++)
-                sb.append("<tr><td>" + shops[i].getName() + "</td><td>" + shops[i].getCity() 
-                		+ "</td><td>" + shops[i].getState()  + "</td><td>" + shops[i].getZip()
-                		+ "</td><td>" + shops[i].getPhone()  + "</td><td>" + shops[i].getOpen()
-                		+ "</td><td>" + shops[i].getClose()  + "</td><td>" + shops[i].getDescription()
-                		 + "</td><td>" + shops[i].getShopId());
+            Review[] reviews = db.getReviews();
+            for (int i=0;i<reviews.length;i++)
+                sb.append("<tr><td>" + reviews[i].getMyContent() + "</td><td>" + reviews[i].getMyDate() 
+                		+ "</td><td>" + reviews[i].getShopId()  + "</td><td>" + reviews[i].getMyWifi()
+                		+ "</td><td>" + reviews[i].getMyCoffee()  + "</td><td>" + reviews[i].getMyFood()
+                		+ "</td><td>" + reviews[i].getMyStudy()  + "</td><td>" + reviews[i].getMyReviewId());
         }
         catch (Exception e)
         {
-            sb.append("</table><br>Error getting shops: " + e.toString() + "<br>");
+            sb.append("</table><br>Error getting reviews: " + e.toString() + "<br>");
         }
         sb.append("</table></body></html>");
         return sb.toString();
@@ -82,21 +81,21 @@ public class ShopService {
     @PUT
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String updateShop(String jobj) throws IOException
+    public String updateReview(String jobj) throws IOException
     {
         ObjectMapper mapper = new ObjectMapper();
-        Shop shop = mapper.readValue(jobj.toString(), Shop.class);
+        Review review = mapper.readValue(jobj.toString(), Review.class);
         StringBuilder text = new StringBuilder();
         try {
             Model db = Model.singleton();
-            int shopid = shop.getShopId();
-            db.updateShop(shop);
-            logger.log(Level.INFO, "update shop with shopid=" + shopid);
-            text.append("Shop id updated with shop id=" + shopid + "\n");
+            int reviewid = review.getMyReviewId();
+            db.updateReview(review);
+            logger.log(Level.INFO, "update review with reviewid=" + reviewid);
+            text.append("Review id updated with review id=" + reviewid + "\n");
         }
         catch (SQLException sqle)
         {
-            String errText = "Error updating shop after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error updating review after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         }
@@ -111,21 +110,21 @@ public class ShopService {
     @DELETE
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String deleteShop(String jobj) throws IOException
+    public String deleteReview(String jobj) throws IOException
     {
         ObjectMapper mapper = new ObjectMapper();
-        Shop shop = mapper.readValue(jobj.toString(), Shop.class);
+        Review review = mapper.readValue(jobj.toString(), Review.class);
         StringBuilder text = new StringBuilder();
         try {
             Model db = Model.singleton();
-            int shopid = shop.getShopId();
-            db.deleteShop(shopid);
-            logger.log(Level.INFO, "shop deleted from db=" + shopid);
-            text.append("Shop id deleted with id=" + shopid);
+            int reviewid = review.getMyReviewId();
+            db.deleteReview(reviewid);
+            logger.log(Level.INFO, "review deleted from db=" + reviewid);
+            text.append("Review id deleted with id=" + reviewid);
         }
         catch (SQLException sqle)
         {
-            String errText = "Error deleteing shop after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error deleteing review after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         }
@@ -140,30 +139,29 @@ public class ShopService {
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String createShop(String jobj) throws IOException {
+    public String createReview(String jobj) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        Shop shop = mapper.readValue(jobj.toString(), Shop.class);
+        Review review = mapper.readValue(jobj.toString(), Review.class);
         
         StringBuilder text = new StringBuilder();
         text.append("The JSON obj:" + jobj.toString() + "\n");
-        text.append("Shop:" + shop.getName() + "\n");
-        text.append("City:" + shop.getCity() + "\n");
-        text.append("State:" + shop.getState() + "\n");
-        text.append("Zip:" + shop.getZip() + "\n");
-        text.append("Phone:" + shop.getPhone() + "\n");
-        text.append("Open:" +shop.getOpen() + "\n");
-        text.append("Close:" +shop.getClose() + "\n");
-        text.append("Description:" +shop.getDescription() + "\n");
+        text.append("Review:" + review.getMyContent() + "\n");
+        text.append("City:" + review.getMyDate() + "\n");
+        text.append("State:" + review.getMyWifi() + "\n");
+        text.append("Zip:" + review.getMyCoffee() + "\n");
+        text.append("Phone:" + review.getMyFood() + "\n");
+        text.append("Open:" +review.getMyStudy() + "\n");
+        text.append("Close:" +review.getShopId() + "\n");
         
         try {
             Model db = Model.singleton();
-            int shopid = db.newShop(shop);
-            logger.log(Level.INFO, "shop persisted to db as shopid=" + shopid);
-            text.append("Shop id persisted with id=" + shopid);
+            int reviewid = db.newReview(review);
+            logger.log(Level.INFO, "review persisted to db as reviewid=" + reviewid);
+            text.append("Review id persisted with id=" + reviewid);
         }
         catch (SQLException sqle)
         {
-            String errText = "Error persisting shop after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error persisting review after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         }
