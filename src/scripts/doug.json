@@ -4,7 +4,7 @@
   "state": "Oregon",
   "zip": 98154,
   "phone": 2061337,
-  "openTime": 0900,
-  "closeTime": 1800,
+  "open": 0900,
+  "close": 1800,
   "description": "This is an oregon starbucks"
 }

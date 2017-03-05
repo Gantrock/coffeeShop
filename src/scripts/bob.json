@@ -4,7 +4,7 @@
   "state": "Washington",
   "zip": 54321,
   "phone": 5555555,
-  "openTime": 1337,
-  "closeTime": 2100,
+  "open": 1337,
+  "close": 2100,
   "description": "A starbucks ripoff"
 }

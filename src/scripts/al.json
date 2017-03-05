@@ -4,7 +4,7 @@
   "state": "Washington",
   "zip": 12345,
   "phone": 8675309,
-  "openTime": 0000,
-  "closeTime": 2400,
+  "open": 0000,
+  "close": 2400,
   "description": "This place is better than starbucks"
 }
