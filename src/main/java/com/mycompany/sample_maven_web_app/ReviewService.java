@@ -16,6 +16,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
@@ -142,10 +143,11 @@ public class ReviewService {
     public String createReview(String jobj) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         Review review = mapper.readValue(jobj.toString(), Review.class);
-        
+        LocalDate localDate = LocalDate.now();
         StringBuilder text = new StringBuilder();
         text.append("The JSON obj:" + jobj.toString() + "\n");
         text.append("Review:" + review.getMyContent() + "\n");
+        text.append("Date:" + localDate);
         text.append("City:" + review.getMyDate() + "\n");
         text.append("State:" + review.getMyWifi() + "\n");
         text.append("Zip:" + review.getMyCoffee() + "\n");

@@ -194,33 +194,33 @@ public class Model {
         while (rows.next())
         {
             logger.log(Level.INFO, "Reading row...");
-            Review shp = new Review();
-            shp.setMyContent(rows.getString("content"));
-            shp.setMyDate(rows.getDate("date"));
-            shp.setShopId(rows.getInt("shopid"));
-            shp.setMyWifi(rows.getInt("wifi"));
-            shp.setMyCoffee(rows.getInt("coffee"));
-            shp.setMyFood(rows.getInt("food"));
-            shp.setMyStudy(rows.getInt("study"));
-            shp.setMyReviewId(rows.getInt("reviewid"));;
-            logger.log(Level.INFO, "Adding review to list with id=" + shp.getMyReviewId());
-            ll.add(shp);
+            Review rvw = new Review();
+            rvw.setMyContent(rows.getString("content"));
+            rvw.setMyDate(rows.getDate("date"));
+            rvw.setShopId(rows.getInt("shopid"));
+            rvw.setMyWifi(rows.getInt("wifi"));
+            rvw.setMyCoffee(rows.getInt("coffee"));
+            rvw.setMyFood(rows.getInt("food"));
+            rvw.setMyStudy(rows.getInt("study"));
+            rvw.setMyReviewId(rows.getInt("reviewid"));;
+            logger.log(Level.INFO, "Adding review to list with id=" + rvw.getMyReviewId());
+            ll.add(rvw);
         }
         return ll.toArray(new Review[ll.size()]);
     }
     
-    public boolean updateReview(Review shp) throws SQLException
+    public boolean updateReview(Review rvw) throws SQLException
     {
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("update reviews ");
-        sqlQuery.append("set content='" + shp.getMyContent() + "', ");
-        sqlQuery.append("date='" + shp.getMyDate() + "',");
-        sqlQuery.append("shopid='" + shp.getShopId() + "',");
-        sqlQuery.append("wifi=" + shp.getMyWifi() + ",");
-        sqlQuery.append("food=" + shp.getMyCoffee() + ",");
-        sqlQuery.append("food=" + shp.getMyFood() + ",");
-        sqlQuery.append("study=" + shp.getMyStudy() + " ");
-        sqlQuery.append("where reviewid=" + shp.getMyReviewId() + ";");
+        sqlQuery.append("set content='" + rvw.getMyContent() + "', ");
+        sqlQuery.append("date='" + rvw.getMyDate() + "',");
+        sqlQuery.append("shopid='" + rvw.getShopId() + "',");
+        sqlQuery.append("wifi=" + rvw.getMyWifi() + ",");
+        sqlQuery.append("food=" + rvw.getMyCoffee() + ",");
+        sqlQuery.append("food=" + rvw.getMyFood() + ",");
+        sqlQuery.append("study=" + rvw.getMyStudy() + " ");
+        sqlQuery.append("where reviewid=" + rvw.getMyReviewId() + ";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
         return st.execute(sqlQuery.toString());
