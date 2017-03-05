@@ -160,7 +160,7 @@ public class Model {
     
     public int newReview(Review rvw) throws SQLException
     {
-        String sqlInsert="insert into reviews (content, date, shopid, wifi, coffee, food, study) values ('"
+        String sqlInsert="insert into reviews (myContent, myDate, shopId, myWifi, myCoffee, myFood, myStudy) values ('"
                 + rvw.getMyContent() + "','" + rvw.getMyDate()+ "','" + rvw.getShopId()
                 + "','" + rvw.getMyWifi()  +"','" + rvw.getMyCoffee()
                 +"','" + rvw.getMyFood() + "','" + rvw.getMyStudy() + "');";

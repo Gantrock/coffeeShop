@@ -147,7 +147,7 @@ public class ReviewService {
         StringBuilder text = new StringBuilder();
         text.append("The JSON obj:" + jobj.toString() + "\n");
         text.append("Review:" + review.getMyContent() + "\n");
-        text.append("Date:" + localDate);
+        text.append("Date:" + localDate + "\n");
         text.append("City:" + review.getMyDate() + "\n");
         text.append("State:" + review.getMyWifi() + "\n");
         text.append("Zip:" + review.getMyCoffee() + "\n");
