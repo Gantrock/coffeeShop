@@ -198,13 +198,13 @@ public class Model {
         {
             logger.log(Level.INFO, "Reading row...");
             Review rvw = new Review();
-            rvw.setMyContent(rows.getString("content"));
+            rvw.setMyContent(rows.getString("myContent"));
             rvw.setMyDate(localDate);
             rvw.setShopId(rows.getInt("shopid"));
-            rvw.setMyWifi(rows.getInt("wifi"));
-            rvw.setMyCoffee(rows.getInt("coffee"));
-            rvw.setMyFood(rows.getInt("food"));
-            rvw.setMyStudy(rows.getInt("study"));
+            rvw.setMyWifi(rows.getInt("myWifi"));
+            rvw.setMyCoffee(rows.getInt("myCoffee"));
+            rvw.setMyFood(rows.getInt("myFood"));
+            rvw.setMyStudy(rows.getInt("myStudy"));
             rvw.setMyReviewId(rows.getInt("reviewid"));;
             logger.log(Level.INFO, "Adding review to list with id=" + rvw.getMyReviewId());
             ll.add(rvw);
