@@ -161,9 +161,9 @@ public class Model {
     public int newReview(Review rvw) throws SQLException
     {
         String sqlInsert="insert into reviews (myContent, myDate, shopId, myWifi, myCoffee, myFood, myStudy) values ('"
-                + rvw.getMyContent() + "',TO_DATE('" + rvw.getMyDate()+ "),'" + rvw.getShopId()
-                + "','" + rvw.getMyWifi()  +"','" + rvw.getMyCoffee()
-                +"','" + rvw.getMyFood() + "','" + rvw.getMyStudy() + "');";
+                + rvw.getMyContent() + "',TO_DATE('" + rvw.getMyDate()+ ")," + rvw.getShopId()
+                + ", " + rvw.getMyWifi()  +", " + rvw.getMyCoffee()
+                +", " + rvw.getMyFood() + ", " + rvw.getMyStudy() + ");";
         Statement s = createStatement();
         logger.log(Level.INFO, "attempting statement execute");
         s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
