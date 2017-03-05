@@ -148,12 +148,12 @@ public class ReviewService {
         text.append("The JSON obj:" + jobj.toString() + "\n");
         text.append("Review:" + review.getMyContent() + "\n");
         text.append("Date:" + localDate + "\n");
-        text.append("City:" + review.getMyDate() + "\n");
-        text.append("State:" + review.getMyWifi() + "\n");
-        text.append("Zip:" + review.getMyCoffee() + "\n");
-        text.append("Phone:" + review.getMyFood() + "\n");
-        text.append("Open:" +review.getMyStudy() + "\n");
-        text.append("Close:" +review.getShopId() + "\n");
+        text.append("Shop ID:" + review.getShopId() + "\n");
+        text.append("Wifi:" + review.getMyWifi() + "\n");
+        text.append("Coffee:" + review.getMyCoffee() + "\n");
+        text.append("Food:" + review.getMyFood() + "\n");
+        text.append("Study:" +review.getMyStudy() + "\n");
+        text.append("Review ID:" +review.getMyReviewId() + "\n");
         
         try {
             Model db = Model.singleton();

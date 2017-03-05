@@ -217,7 +217,7 @@ public class Model {
         sqlQuery.append("date='" + rvw.getMyDate() + "',");
         sqlQuery.append("shopid='" + rvw.getShopId() + "',");
         sqlQuery.append("wifi=" + rvw.getMyWifi() + ",");
-        sqlQuery.append("food=" + rvw.getMyCoffee() + ",");
+        sqlQuery.append("coffee=" + rvw.getMyCoffee() + ",");
         sqlQuery.append("food=" + rvw.getMyFood() + ",");
         sqlQuery.append("study=" + rvw.getMyStudy() + " ");
         sqlQuery.append("where reviewid=" + rvw.getMyReviewId() + ";");
