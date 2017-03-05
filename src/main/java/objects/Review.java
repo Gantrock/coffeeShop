@@ -5,6 +5,7 @@
  */
 package objects;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
  */
 public class Review {
     private String myContent;
-    private Date myDate;
+    private LocalDate myDate;
     private int shopid;
     private int myWifi;
     private int myCoffee;
@@ -38,14 +39,14 @@ public class Review {
     /**
      * @return the myDate
      */
-    public Date getMyDate() {
+    public LocalDate getMyDate() {
         return myDate;
     }
 
     /**
      * @param myDate the myDate to set
      */
-    public void setMyDate(Date myDate) {
+    public void setMyDate(LocalDate myDate) {
         this.myDate = myDate;
     }
 
@@ -132,7 +133,7 @@ public class Review {
     public void setMyReviewId(int myReviewId) {
         this.myReviewId = myReviewId;
     }
-   
+
 
 
 

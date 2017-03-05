@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -191,12 +192,13 @@ public class Model {
         String sqlQuery ="select * from reviews;";
         Statement st = createStatement();
         ResultSet rows = st.executeQuery(sqlQuery);
+        LocalDate localDate = LocalDate.now();
         while (rows.next())
         {
             logger.log(Level.INFO, "Reading row...");
             Review rvw = new Review();
             rvw.setMyContent(rows.getString("content"));
-            rvw.setMyDate(rows.getDate("date"));
+            rvw.setMyDate(localDate);
             rvw.setShopId(rows.getInt("shopid"));
             rvw.setMyWifi(rows.getInt("wifi"));
             rvw.setMyCoffee(rows.getInt("coffee"));
