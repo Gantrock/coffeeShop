@@ -215,7 +215,7 @@ public class Model {
         sqlQuery.append("update reviews ");
         sqlQuery.append("set content='" + rvw.getMyContent() + "', ");
         sqlQuery.append("date='" + rvw.getMyDate() + "',");
-        sqlQuery.append("shopid='" + rvw.getShopId() + "',");
+        sqlQuery.append("shopid=" + rvw.getShopId() + ",");
         sqlQuery.append("wifi=" + rvw.getMyWifi() + ",");
         sqlQuery.append("coffee=" + rvw.getMyCoffee() + ",");
         sqlQuery.append("food=" + rvw.getMyFood() + ",");
