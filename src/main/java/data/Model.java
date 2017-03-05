@@ -161,8 +161,9 @@ public class Model {
     
     public int newReview(Review rvw) throws SQLException
     {
+        LocalDate localDate = LocalDate.now();
         String sqlInsert="insert into reviews (myContent, myDate, shopId, myWifi, myCoffee, myFood, myStudy) values ('"
-                + rvw.getMyContent() + "','" + rvw.getMyDate()+ "'," + rvw.getShopId()
+                + rvw.getMyContent() + "','" + localDate + "'," + rvw.getShopId()
                 + ", " + rvw.getMyWifi()  +", " + rvw.getMyCoffee()
                 +", " + rvw.getMyFood() + ", " + rvw.getMyStudy() + ");";
         Statement s = createStatement();
