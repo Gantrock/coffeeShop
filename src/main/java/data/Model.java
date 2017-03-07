@@ -217,7 +217,7 @@ public class Model {
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("update reviews ");
         sqlQuery.append("set myContent='" + rvw.getMyContent() + "', ");
-        sqlQuery.append("myDate=" + rvw.getMyDate() + ",");
+        sqlQuery.append("myDate='" + (rvw.getMyDate()).toString() + "',");
         sqlQuery.append("shopid=" + rvw.getShopId() + ",");
         sqlQuery.append("myWifi=" + rvw.getMyWifi() + ",");
         sqlQuery.append("myCoffee=" + rvw.getMyCoffee() + ",");
