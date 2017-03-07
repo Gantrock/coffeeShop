@@ -214,10 +214,11 @@ public class Model {
     
     public boolean updateReview(Review rvw) throws SQLException
     {
+        LocalDate localDate = LocalDate.now();
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("update reviews ");
         sqlQuery.append("set myContent='" + rvw.getMyContent() + "', ");
-        sqlQuery.append("myDate='" + (rvw.getMyDate()).toString() + "',");
+        sqlQuery.append("myDate='" + localDate + "',");
         sqlQuery.append("shopid=" + rvw.getShopId() + ",");
         sqlQuery.append("myWifi=" + rvw.getMyWifi() + ",");
         sqlQuery.append("myCoffee=" + rvw.getMyCoffee() + ",");
