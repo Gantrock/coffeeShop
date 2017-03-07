@@ -199,7 +199,7 @@ public class Model {
             logger.log(Level.INFO, "Reading row...");
             Review rvw = new Review();
             rvw.setMyContent(rows.getString("myContent"));
-            rvw.setMyDate(localDate);
+            rvw.setMyDate((rows.getDate("myDate")).toLocalDate());
             rvw.setShopId(rows.getInt("shopid"));
             rvw.setMyWifi(rows.getInt("myWifi"));
             rvw.setMyCoffee(rows.getInt("myCoffee"));
@@ -216,13 +216,13 @@ public class Model {
     {
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("update reviews ");
-        sqlQuery.append("set content='" + rvw.getMyContent() + "', ");
-        sqlQuery.append("date='" + rvw.getMyDate() + "',");
+        sqlQuery.append("set myContent='" + rvw.getMyContent() + "', ");
+        sqlQuery.append("myDate='" + rvw.getMyDate() + "',");
         sqlQuery.append("shopid=" + rvw.getShopId() + ",");
-        sqlQuery.append("wifi=" + rvw.getMyWifi() + ",");
-        sqlQuery.append("coffee=" + rvw.getMyCoffee() + ",");
-        sqlQuery.append("food=" + rvw.getMyFood() + ",");
-        sqlQuery.append("study=" + rvw.getMyStudy() + " ");
+        sqlQuery.append("myWifi=" + rvw.getMyWifi() + ",");
+        sqlQuery.append("myCoffee=" + rvw.getMyCoffee() + ",");
+        sqlQuery.append("myFood=" + rvw.getMyFood() + ",");
+        sqlQuery.append("myStudy=" + rvw.getMyStudy() + " ");
         sqlQuery.append("where reviewid=" + rvw.getMyReviewId() + ";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
