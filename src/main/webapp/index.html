@@ -42,7 +42,7 @@
           background-color: purple;
           border: 1px solid black;
         }
-        .shopId {
+        .shopid {
           width: 60px;
         }
         .name {
@@ -83,14 +83,14 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
     $(document).ready(function () { 
-        var old_shopId = document.getElementById("shopId").value;
+        var old_shopId = document.getElementById("shopid").value;
         
         // Get-Data Click function
         //
         // Calls the GET service to lookup a currently entered shopId
         $('#get-data').click(function () 
         {
-          var shopId = document.getElementById("shopId");
+          var shopId = document.getElementById("shopid");
           var url='tcss360/shops/'+shopId.value;
 
           $.ajax({
@@ -101,15 +101,15 @@
           });        
         });
 
-        $('#shopId').focusin(function () {
-            old_shopId = document.getElementById("shopId").value;    
+        $('#shopid').focusin(function () {
+            old_shopId = document.getElementById("shopid").value;    
         });
 
         // If the shop exits the shopId textbox and places focus on another
         // GUI control on the screen, and if the shop id had changed since
         // the shop entered the box, then reload the shop form
         $('#shopId').focusout(function () {
-            var curr_shopId = document.getElementById("shopId").value;    
+            var curr_shopId = document.getElementById("shopid").value;    
             //alert(curr_shopId + '---' + old_shopId)
             if (curr_shopId != old_shopId)
                 getshop();
@@ -120,7 +120,7 @@
         // Calls the DELETE service to delete the selected shop
         $('#delete-shop').click(function ()
         {
-           var shopId = document.getElementById("shopId");
+           var shopId = document.getElementById("shopid");
            var name = document.getElementById("name");
            var shop = { 'shopId': shopId.value };           
            var url='tcss360/shops/';
@@ -149,7 +149,7 @@
            document.getElementById("openTime").value = "";
            document.getElementById("closeTime").value = "";
            document.getElementById("description").value = "";
-           document.getElementById("shopId").disabled = true;
+           document.getElementById("shopid").disabled = true;
         });        
 
         // Save-Shop Click function
@@ -158,7 +158,7 @@
         // If an existing shop, call the PUT to update the shop
         $('#save-shop').click(function ()
         {
-            if (document.getElementById("shopId").disabled)
+            if (document.getElementById("shopid").disabled)
             {
                 // Create a new record
                 var name = document.getElementById("name");
@@ -197,7 +197,7 @@
                 var openTime = document.getElementById("openTime");
                 var closeTime = document.getElementById("closeTime");
                 var description = document.getElementById("description");
-                var shopId = document.getElementById("shopId");
+                var shopId = document.getElementById("shopid");
                 var shop = { 'name': name.value, 'city': city.value, 
                             'state': state.value, 'zip': zip.value, 
                             'phone': phone.value, 'openTime': openTime.value,
@@ -262,7 +262,7 @@
     // gets and displays shops by calling render
     function getshop() {
         // Form load
-        var shopId = document.getElementById("shopId"); 
+        var shopId = document.getElementById("shopid"); 
         var url='tcss360/shops/' + shopId.value;
 
         $.ajax({
@@ -276,7 +276,7 @@
     // renders the shop table
     function render(data)  {
       $.each(data, function(index, shop) { 
-          var newrow = "<tr><td id=\"shopId\"" + index + "\">"+ shop.shopId + "</td>";
+          var newrow = "<tr><td id=\"shopid\"" + index + "\">"+ shop.shopId + "</td>";
           newrow += "<td id=\"name\">" + shop.name + "</td>";
           newrow += "<td id=\"city\">" + shop.city + "</td></tr>";
           newrow += "<td id=\"state\">" + shop.state + "</td></tr>";
@@ -301,7 +301,7 @@
     {
         $('#mybody').empty();
         getshops();
-        document.getElementById("shopId").value = "";
+        document.getElementById("shopid").value = "";
     }
     
     // display the shopId of a newly created shop as supplied from the service
@@ -310,7 +310,7 @@
         $.each(data, function(index, shop) { 
           document.getElementById("shopId").value = shop.shopId;
         });
-        document.getElementById("shopId").disabled = false;
+        document.getElementById("shopid").disabled = false;
         $('#mybody').empty();
         getshops();
     }
@@ -328,7 +328,7 @@
             $('#openTime').val(shop.openTime);
             $('#closeTime').val(shop.closeTime);
             $('#description').val(shop.description);
-            $('#shopId').val(shop.shopId);
+            $('#shopid').val(shop.shopId);
         });
       else
       {

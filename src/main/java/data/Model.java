@@ -121,7 +121,28 @@ public class Model {
     }
             
     
-    public int newShop(Shop shp) throws SQLException
+//    public int newShop(Shop shp) throws SQLException
+//    {
+//        String sqlInsert="insert into shops (name, city, state, zip, phone, openTime, closeTime, description) values ('"
+//                + shp.getName() + "','" + shp.getCity() + "','" + shp.getState() 
+//                + "','" + shp.getZip()  +"','" + shp.getPhone()
+//                +"','" + shp.getOpen() + "','" + shp.getClose()  
+//                +"','" + shp.getDescription()+ "');";
+//        Statement s = createStatement();
+//        logger.log(Level.INFO, "attempting statement execute");
+//        s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
+//        logger.log(Level.INFO, "statement executed.  atempting get generated keys");
+//        ResultSet rs = s.getGeneratedKeys();
+//        logger.log(Level.INFO, "retrieved keys from statement");
+//        int shopid = -1;
+//        while (rs.next())
+//            shopid = rs.getInt(9);   // assuming 9th column is shopid
+//        logger.log(Level.INFO, "The new shop id=" + shopid);
+//        return shopid;
+//    }
+    
+    
+    public Shop newShop(Shop shp) throws SQLException
     {
         String sqlInsert="insert into shops (name, city, state, zip, phone, openTime, closeTime, description) values ('"
                 + shp.getName() + "','" + shp.getCity() + "','" + shp.getState() 
@@ -134,11 +155,12 @@ public class Model {
         logger.log(Level.INFO, "statement executed.  atempting get generated keys");
         ResultSet rs = s.getGeneratedKeys();
         logger.log(Level.INFO, "retrieved keys from statement");
-        int shopid = -1;
+        int shopid = -1;  
         while (rs.next())
-            shopid = rs.getInt(9);   // assuming 9th column is shopid
+            shopid = rs.getInt(9);   // assuming 9th column is userid
         logger.log(Level.INFO, "The new shop id=" + shopid);
-        return shopid;
+        shp.setShopId(shopid);
+        return shp;
     }
     
     public void deleteShop(int shopid) throws SQLException

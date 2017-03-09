@@ -84,8 +84,8 @@ public class ShopService {
      @GET
     @Path("{shopid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Shop> getUsersJson(@PathParam("shopid") String id) {
-        LinkedList<Shop> lusers = new LinkedList<Shop>();
+    public List<Shop> getshopsJson(@PathParam("shopid") String id) {
+        LinkedList<Shop> lshops = new LinkedList<Shop>();
      
         try
         {
@@ -94,16 +94,16 @@ public class ShopService {
             Shop[] shops = db.getShops(shopid);
             if (shopid ==0)
                 for (int i=0;i<shops.length;i++)
-                    lusers.add(shops[i]);
+                    lshops.add(shops[i]);
             else
-                lusers.add(shops[0]);
+                lshops.add(shops[0]);
             logger.log(Level.INFO, "Received request to fetch shop id=" + shopid);
-            return lusers;
+            return lshops;
         }
         catch (Exception e)
         {
             JSONObject obj = new JSONObject();
-                logger.log(Level.WARNING, "Error getting users:" + e.toString());
+                logger.log(Level.WARNING, "Error getting shops:" + e.toString());
                 return null;
         }
     }    
@@ -172,10 +172,55 @@ public class ShopService {
         return text.toString();
     }
     
+//    @POST
+//    @Produces(MediaType.TEXT_PLAIN)
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public String createShop(String jobj) throws IOException {
+//        ObjectMapper mapper = new ObjectMapper();
+//        Shop shop = mapper.readValue(jobj.toString(), Shop.class);
+//        
+//        StringBuilder text = new StringBuilder();
+//        text.append("The JSON obj:" + jobj.toString() + "\n");
+//        text.append("Shop:" + shop.getName() + "\n");
+//        text.append("City:" + shop.getCity() + "\n");
+//        text.append("State:" + shop.getState() + "\n");
+//        text.append("Zip:" + shop.getZip() + "\n");
+//        text.append("Phone:" + shop.getPhone() + "\n");
+//        text.append("Open:" +shop.getOpen() + "\n");
+//        text.append("Close:" +shop.getClose() + "\n");
+//        text.append("Description:" +shop.getDescription() + "\n");
+//        
+//        try {
+//            Model db = Model.singleton();
+//            int shopid = db.newShop(shop);
+//            logger.log(Level.INFO, "shop persisted to db as shopid=" + shopid);
+//            text.append("Shop id persisted with id=" + shopid);
+//        }
+//        catch (SQLException sqle)
+//        {
+//            String errText = "Error persisting shop after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+//            logger.log(Level.SEVERE, errText);
+//            text.append(errText);
+//        }
+//        catch (Exception e)
+//        {
+//            logger.log(Level.SEVERE, "Error connecting to db.");
+//        }
+//        
+//        
+//        return text.toString();
+//    }
+    
+    
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String createShop(String jobj) throws IOException {
+    public List<Shop> createShop(String jobj) throws IOException {
+        logger.log(Level.INFO, "RECEIVED CREATE REQUEST FOR:\n");
+        logger.log(Level.INFO, "OBJECT:" + jobj + "\n");
+        
+        LinkedList<Shop> lshops = new LinkedList<Shop>();
+
         ObjectMapper mapper = new ObjectMapper();
         Shop shop = mapper.readValue(jobj.toString(), Shop.class);
         
@@ -192,9 +237,10 @@ public class ShopService {
         
         try {
             Model db = Model.singleton();
-            int shopid = db.newShop(shop);
-            logger.log(Level.INFO, "shop persisted to db as shopid=" + shopid);
-            text.append("Shop id persisted with id=" + shopid);
+            Shop shp = db.newShop(shop);
+            logger.log(Level.INFO, "shop persisted to db as shopid=" + shp.getShopId());
+            text.append("Shop id persisted with id=" + shp.getShopId());
+            lshops.add(shp);
         }
         catch (SQLException sqle)
         {
@@ -207,8 +253,8 @@ public class ShopService {
             logger.log(Level.SEVERE, "Error connecting to db.");
         }
         
-        
-        return text.toString();
+        return lshops;
     }
 }
+
 
