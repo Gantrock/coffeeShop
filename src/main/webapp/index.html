@@ -42,7 +42,7 @@
           background-color: purple;
           border: 1px solid black;
         }
-        .shopid {
+        .shopId {
           width: 60px;
         }
         .name {
@@ -83,15 +83,15 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
     $(document).ready(function () { 
-        var old_shopid = document.getElementById("shopid").value;
+        var old_shopId = document.getElementById("shopId").value;
         
         // Get-Data Click function
         //
-        // Calls the GET service to lookup a currently entered shopid
+        // Calls the GET service to lookup a currently entered shopId
         $('#get-data').click(function () 
         {
-          var shopid = document.getElementById("shopid");
-          var url='tcss360/shops/'+shopid.value;
+          var shopId = document.getElementById("shopId");
+          var url='tcss360/shops/'+shopId.value;
 
           $.ajax({
             type: 'GET',
@@ -101,17 +101,17 @@
           });        
         });
 
-        $('#shopid').focusin(function () {
-            old_shopid = document.getElementById("shopid").value;    
+        $('#shopId').focusin(function () {
+            old_shopId = document.getElementById("shopId").value;    
         });
 
-        // If the shop exits the shopid textbox and places focus on another
+        // If the shop exits the shopId textbox and places focus on another
         // GUI control on the screen, and if the shop id had changed since
         // the shop entered the box, then reload the shop form
-        $('#shopid').focusout(function () {
-            var curr_shopid = document.getElementById("shopid").value;    
-            //alert(curr_shopid + '---' + old_shopid)
-            if (curr_shopid != old_shopid)
+        $('#shopId').focusout(function () {
+            var curr_shopId = document.getElementById("shopId").value;    
+            //alert(curr_shopId + '---' + old_shopId)
+            if (curr_shopId != old_shopId)
                 getshop();
         });
         
@@ -120,11 +120,11 @@
         // Calls the DELETE service to delete the selected shop
         $('#delete-shop').click(function ()
         {
-           var shopid = document.getElementById("shopid");
+           var shopId = document.getElementById("shopId");
            var name = document.getElementById("name");
-           var shop = { 'shopid': shopid.value };           
+           var shop = { 'shopId': shopId.value };           
            var url='tcss360/shops/';
-           if (confirm('Are you sure - DELETE ' + name.value + '-(' + shopid.value + ') ?')) {
+           if (confirm('Are you sure - DELETE ' + name.value + '-(' + shopId.value + ') ?')) {
              $.ajax({
                type: 'DELETE',
                url: url,
@@ -149,7 +149,7 @@
            document.getElementById("openTime").value = "";
            document.getElementById("closeTime").value = "";
            document.getElementById("description").value = "";
-           document.getElementById("shopid").disabled = true;
+           document.getElementById("shopId").disabled = true;
         });        
 
         // Save-Shop Click function
@@ -158,7 +158,7 @@
         // If an existing shop, call the PUT to update the shop
         $('#save-shop').click(function ()
         {
-            if (document.getElementById("shopid").disabled)
+            if (document.getElementById("shopId").disabled)
             {
                 // Create a new record
                 var name = document.getElementById("name");
@@ -197,7 +197,7 @@
                 var openTime = document.getElementById("openTime");
                 var closeTime = document.getElementById("closeTime");
                 var description = document.getElementById("description");
-                var shopid = document.getElementById("shopid");
+                var shopId = document.getElementById("shopId");
                 var shop = { 'name': name.value, 'city': city.value, 
                             'state': state.value, 'zip': zip.value, 
                             'phone': phone.value, 'openTime': openTime.value,
@@ -228,9 +228,9 @@
         // Use .text() as td doesn't have method .val()
         // Empty first time as the td has no text until clicked.
         $(".table-body").on('click', 'tr', function() {
-            var clicked_shopid=$(this).find('td:first').text();
-            old_shopid = clicked_shopid;
-            var url='tcss360/shops/'+clicked_shopid;
+            var clicked_shopId=$(this).find('td:first').text();
+            old_shopId = clicked_shopId;
+            var url='tcss360/shops/'+clicked_shopId;
              $.ajax({
                type: 'GET',
                url: url,
@@ -262,8 +262,8 @@
     // gets and displays shops by calling render
     function getshop() {
         // Form load
-        var shopid = document.getElementById("shopid"); 
-        var url='tcss360/shops/' + shopid.value;
+        var shopId = document.getElementById("shopId"); 
+        var url='tcss360/shops/' + shopId.value;
 
         $.ajax({
           type: 'GET',
@@ -276,7 +276,7 @@
     // renders the shop table
     function render(data)  {
       $.each(data, function(index, shop) { 
-          var newrow = "<tr><td id=\"shopid\"" + index + "\">"+ shop.shopid + "</td>";
+          var newrow = "<tr><td id=\"shopId\"" + index + "\">"+ shop.shopId + "</td>";
           newrow += "<td id=\"name\">" + shop.name + "</td>";
           newrow += "<td id=\"city\">" + shop.city + "</td></tr>";
           newrow += "<td id=\"state\">" + shop.state + "</td></tr>";
@@ -301,16 +301,16 @@
     {
         $('#mybody').empty();
         getshops();
-        document.getElementById("shopid").value = "";
+        document.getElementById("shopId").value = "";
     }
     
-    // display the shopid of a newly created shop as supplied from the service
+    // display the shopId of a newly created shop as supplied from the service
     function render_newshop(data)
     {
         $.each(data, function(index, shop) { 
-          document.getElementById("shopid").value = shop.shopid;
+          document.getElementById("shopId").value = shop.shopId;
         });
-        document.getElementById("shopid").disabled = false;
+        document.getElementById("shopId").disabled = false;
         $('#mybody').empty();
         getshops();
     }
@@ -328,7 +328,7 @@
             $('#openTime').val(shop.openTime);
             $('#closeTime').val(shop.closeTime);
             $('#description').val(shop.description);
-            $('#shopid').val(shop.shopid);
+            $('#shopId').val(shop.shopId);
         });
       else
       {
@@ -360,7 +360,7 @@
    </tr>
    <tr>
        <td>Enter Shop ID :  </td>
-       <td><input type="text" id="shopid" size="10"/>  
+       <td><input type="text" id="shopId" size="10"/>  
    </tr>
    <tr>
        <td>Enter Shop Name :  </td>
@@ -407,7 +407,7 @@
                  <td class="openTime">Open</td>
                  <td class="closeTime">Close</td>
                  <td class="description">Description</td>
-                 <td class="shopid">Shop Id</td>
+                 <td class="shopId">Shop Id</td>
              </tr>               
            </thead>
            <tbody id="mybody" class="table-body">
