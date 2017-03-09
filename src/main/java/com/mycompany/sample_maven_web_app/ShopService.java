@@ -16,12 +16,16 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
+import javax.ws.rs.PathParam;
 import objects.Shop;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  * REST Web Service
@@ -46,35 +50,66 @@ public class ShopService {
      * Retrieves representation of an instance of services.GenericResource
      * @return an instance of java.lang.String
      */
-    @GET
-    @Produces(MediaType.TEXT_HTML)
-    public String getShops() {
-        //TODO return proper representation object
-        StringBuilder sb = new StringBuilder();
-        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;"
-                + "font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>SHOPS LIST:"
-                + "</b><br><br><table cellpadding=10 border=1><tr><td>Name</td><td>City</td>"
-                + "<td>State</td><td>Zip</td><td>Phone</td><td>Open</td><td>Close</td>"
-                + "<td>Description</td><td>Shop ID</td></tr>");
+//    @GET
+//    @Produces(MediaType.TEXT_HTML)
+//    public String getShops() {
+//        //TODO return proper representation object
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;"
+//                + "font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>SHOPS LIST:"
+//                + "</b><br><br><table cellpadding=10 border=1><tr><td>Name</td><td>City</td>"
+//                + "<td>State</td><td>Zip</td><td>Phone</td><td>Open</td><td>Close</td>"
+//                + "<td>Description</td><td>Shop ID</td></tr>");
+//        try
+//        {
+//            Model db = Model.singleton();
+//            Shop[] shops = db.getShops();
+//            for (int i=0;i<shops.length;i++)
+//                sb.append("<tr><td>" + shops[i].getName() + "</td><td>" + shops[i].getCity() 
+//                		+ "</td><td>" + shops[i].getState()  + "</td><td>" + shops[i].getZip()
+//                		+ "</td><td>" + shops[i].getPhone()  + "</td><td>" + shops[i].getOpen()
+//                		+ "</td><td>" + shops[i].getClose()  + "</td><td>" + shops[i].getDescription()
+//                		 + "</td><td>" + shops[i].getShopId());
+//        }
+//        catch (Exception e)
+//        {
+//            sb.append("</table><br>Error getting shops: " + e.toString() + "<br>");
+//        }
+//        sb.append("</table></body></html>");
+//        return sb.toString();
+//    }
+
+    
+    
+     @GET
+    @Path("{shopid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Shop> getUsersJson(@PathParam("shopid") String id) {
+        LinkedList<Shop> lusers = new LinkedList<Shop>();
+     
         try
         {
+            int shopid = Integer.parseInt(id);
             Model db = Model.singleton();
-            Shop[] shops = db.getShops();
-            for (int i=0;i<shops.length;i++)
-                sb.append("<tr><td>" + shops[i].getName() + "</td><td>" + shops[i].getCity() 
-                		+ "</td><td>" + shops[i].getState()  + "</td><td>" + shops[i].getZip()
-                		+ "</td><td>" + shops[i].getPhone()  + "</td><td>" + shops[i].getOpen()
-                		+ "</td><td>" + shops[i].getClose()  + "</td><td>" + shops[i].getDescription()
-                		 + "</td><td>" + shops[i].getShopId());
+            Shop[] shops = db.getShops(shopid);
+            if (shopid ==0)
+                for (int i=0;i<shops.length;i++)
+                    lusers.add(shops[i]);
+            else
+                lusers.add(shops[0]);
+            logger.log(Level.INFO, "Received request to fetch shop id=" + shopid);
+            return lusers;
         }
         catch (Exception e)
         {
-            sb.append("</table><br>Error getting shops: " + e.toString() + "<br>");
+            JSONObject obj = new JSONObject();
+                logger.log(Level.WARNING, "Error getting users:" + e.toString());
+                return null;
         }
-        sb.append("</table></body></html>");
-        return sb.toString();
-    }
-
+    }    
+    
+    
+    
     /**
      * PUT method for updating or creating an instance of GenericResource
      * @param content representation for the resource

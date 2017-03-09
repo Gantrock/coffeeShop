@@ -25,7 +25,9 @@ import objects.Review;
 public class Model {
     static final Logger logger = Logger.getLogger(Model.class.getName());
     private static Model instance;
+    private static Model instancemock;
     private Connection conn;
+    private static String dbConnUrl = System.getenv("JDBC_DATABASE_URL");
     
     public static Model singleton() throws Exception {
         if (instance == null) {
@@ -34,16 +36,37 @@ public class Model {
         return instance;
     }
     
+    public static Model mockSingleton(Connection conn) throws Exception {
+        if (instancemock == null) {
+            instancemock = new Model(conn);
+        }
+        return instancemock;
+    }
+    
+    
     Model() throws Exception
-    {
+    {  
         Class.forName("org.postgresql.Driver");
-        String dbUrl = System.getenv("JDBC_DATABASE_URL");
-        if ((dbUrl == null) || (dbUrl.length() < 1))
-            dbUrl = System.getProperties().getProperty("DBCONN");
-        logger.log(Level.INFO, "dbUrl=" + dbUrl);  
+        logger.log(Level.INFO, "dbUrl=" + getDBConnURL());  
         logger.log(Level.INFO, "attempting db connection");
-        conn = DriverManager.getConnection(dbUrl);
-        logger.log(Level.INFO, "db connection ok.");
+        try
+        {
+            conn = DriverManager.getConnection(getDBConnURL());
+            logger.log(Level.INFO, "db connection ok.");
+        }
+        catch (Exception e)
+        {
+            logger.log(Level.SEVERE, "Unable to open db connection:" + e.toString());
+        }
+    }
+    
+    Model(Connection mockconn) throws Exception
+    {  
+        Class.forName("org.postgresql.Driver");
+        logger.log(Level.INFO, "dbUrl=" + getDBConnURL());  
+        logger.log(Level.INFO, "attempting mock db connection");
+        conn = mockconn;
+        logger.log(Level.INFO, "mock db connection ok.");
     }
     
     private Connection getConnection()
@@ -85,6 +108,19 @@ public class Model {
         return null;
     }
     
+    public static String getDBConnURL() {
+        if ((dbConnUrl == null) || (dbConnUrl.length() < 1))
+            dbConnUrl = System.getProperties().getProperty("DBCONN");        
+        logger.log(Level.INFO, "dbConnUrl VALUE=" + dbConnUrl);
+        logger.log(Level.INFO, "sys-prop-getprop DBCONN VALUE=" + System.getProperties().getProperty("DBCONN"));
+        return dbConnUrl;
+    }
+    
+    public static void setDBConnURL(String connUrl) {
+        dbConnUrl = connUrl;
+    }
+            
+    
     public int newShop(Shop shp) throws SQLException
     {
         String sqlInsert="insert into shops (name, city, state, zip, phone, openTime, closeTime, description) values ('"
@@ -113,30 +149,60 @@ public class Model {
         pst.execute();
     }
     
-    public Shop[] getShops() throws SQLException
+//    public Shop[] getShops() throws SQLException
+//    {
+//        LinkedList<Shop> ll = new LinkedList<>();
+//        String sqlQuery ="select * from shops;";
+//        Statement st = createStatement();
+//        ResultSet rows = st.executeQuery(sqlQuery);
+//        while (rows.next())
+//        {
+//            logger.log(Level.INFO, "Reading row...");
+//            Shop shp = new Shop();
+//            shp.setName(rows.getString("name"));
+//            shp.setShopId(rows.getInt("shopid"));
+//            shp.setCity(rows.getString("city"));
+//            shp.setState(rows.getString("state"));
+//            shp.setZip(rows.getInt("zip"));
+//            shp.setPhone(rows.getInt("phone"));
+//            shp.setOpen(rows.getInt("openTime"));
+//            shp.setClose(rows.getInt("closeTime"));
+//            shp.setDescription(rows.getString("description"));
+//            logger.log(Level.INFO, "Adding shop to list with id=" + shp.getShopId());
+//            ll.add(shp);
+//        }
+//        return ll.toArray(new Shop[ll.size()]);
+//    }
+//    
+    
+    public Shop[] getShops(int userId) throws SQLException
     {
-        LinkedList<Shop> ll = new LinkedList<>();
-        String sqlQuery ="select * from shops;";
+        LinkedList<Shop> ll = new LinkedList<Shop>();
+        String sqlQuery ="select * from shops";
+        sqlQuery += (userId > 0) ? " where shopid=" + userId + " order by shopid;" : " order by shopid;";
         Statement st = createStatement();
         ResultSet rows = st.executeQuery(sqlQuery);
         while (rows.next())
         {
             logger.log(Level.INFO, "Reading row...");
-            Shop shp = new Shop();
-            shp.setName(rows.getString("name"));
-            shp.setShopId(rows.getInt("shopid"));
-            shp.setCity(rows.getString("city"));
-            shp.setState(rows.getString("state"));
-            shp.setZip(rows.getInt("zip"));
-            shp.setPhone(rows.getInt("phone"));
-            shp.setOpen(rows.getInt("openTime"));
-            shp.setClose(rows.getInt("closeTime"));
-            shp.setDescription(rows.getString("description"));
-            logger.log(Level.INFO, "Adding shop to list with id=" + shp.getShopId());
-            ll.add(shp);
+             Shop shp = new Shop();
+             shp.setName(rows.getString("name"));
+             shp.setShopId(rows.getInt("shopid"));
+             shp.setCity(rows.getString("city"));
+             shp.setState(rows.getString("state"));
+             shp.setZip(rows.getInt("zip"));
+             shp.setPhone(rows.getInt("phone"));
+             shp.setOpen(rows.getInt("openTime"));
+             shp.setClose(rows.getInt("closeTime"));
+             shp.setDescription(rows.getString("description"));
+             logger.log(Level.INFO, "Adding shop to list with id=" + shp.getShopId());
+             ll.add(shp);
         }
         return ll.toArray(new Shop[ll.size()]);
     }
+    
+    
+    
     
     public boolean updateShop(Shop shp) throws SQLException
     {

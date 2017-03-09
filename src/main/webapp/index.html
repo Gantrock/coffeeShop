@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
     <head>
         <title>Coffee Shop Home</title>
@@ -7,4 +7,405 @@
     <body>
         <h1>The Burrito Strikes Back!</h1>
     </body>
+</html>-->
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <style>
+        <!-- inline style sheet -->
+        #myform{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 20px;
+            padding-left: 20px;
+            font-family: sans-serif;
+        }
+        #mytable {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 20px;
+            padding-left: 20px;
+            font-family: sans-serif;
+        }
+        div {
+            font-family: sans-serif;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+        .table-header {
+          background-color: yellow;
+          border: 1px solid black;
+        }
+        .shopid {
+          width: 60px;
+        }
+        .name {
+          width: 200px;
+        }
+        .city {
+          width: 100px;
+        }
+        .state {
+          width: 100px;
+        }
+        .zip {
+          width: 50px;
+        }
+        .phone {
+          width: 100px;
+        }
+        .openTime {
+          width: 50px;
+        }
+        .closeTime {
+          width: 500px;
+        }
+        .description {
+          width: 300px;
+        }
+        th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          padding-right: 20px;
+          padding-left: 20px;    
+        }
+    </style>
+    <title>User Editor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
+    <script language="javascript">
+    $(document).ready(function () { 
+        var old_shopid = document.getElementById("shopid").value;
+        
+        // Get-Data Click function
+        //
+        // Calls the GET service to lookup a currently entered shopid
+        $('#get-data').click(function () 
+        {
+          var shopid = document.getElementById("shopid");
+          var url='tcss360/shops/'+shopid.value;
+
+          $.ajax({
+            type: 'GET',
+            url: url,
+            datatype: 'json',
+            success: render_form
+          });        
+        });
+
+        $('#shopid').focusin(function () {
+            old_shopid = document.getElementById("shopid").value;    
+        });
+
+        // If the shop exits the shopid textbox and places focus on another
+        // GUI control on the screen, and if the shop id had changed since
+        // the shop entered the box, then reload the shop form
+        $('#shopid').focusout(function () {
+            var curr_shopid = document.getElementById("shopid").value;    
+            //alert(curr_shopid + '---' + old_shopid)
+            if (curr_shopid != old_shopid)
+                getshop();
+        });
+        
+        // Delete-User Click function
+        //
+        // Calls the DELETE service to delete the selected shop
+        $('#delete-shop').click(function ()
+        {
+           var shopid = document.getElementById("shopid");
+           var shopname = document.getElementById("name");
+           var shop = { 'shopid': shopid.value };           
+           var url='tcss360/shops/';
+           if (confirm('Are you sure - DELETE ' + shopname.value + '-(' + shopid.value + ') ?')) {
+             $.ajax({
+               type: 'DELETE',
+               url: url,
+               datatype: 'json',
+               data: JSON.stringify(shop),
+               contentType: 'application/json',
+               success: render_delete
+             }); 
+           } 
+        });
+        
+        // New-User Click function
+        //
+        // Clears the form to allow entry of a new shop record
+        $('#new-shop').click(function ()
+        {
+           document.getElementById("shopid").disabled = true;
+           document.getElementById("name").value = "";
+           document.getElementById("city").value = "";
+           document.getElementById("state").value = "";
+           document.getElementById("zip").value = "";
+           document.getElementById("phone").value = "";
+           document.getElementById("openTime").value = "";
+           document.getElementById("closeTime").value = "";
+           document.getElementById("description").value = "";
+        });        
+
+        // Save-User Click function
+        //
+        // If a new shop, calls the POST to create a new shop
+        // If an existing shop, call the PUT to update the shop
+        $('#save-shop').click(function ()
+        {
+            if (document.getElementById("shopid").disabled)
+            {
+                // Create a new record
+                var shopname = document.getElementById("name");
+                var city = document.getElementById("city");
+                var state = document.getElementById("state");
+                var zip = document.getElementById("zip");
+                var phone = document.getElementById("phone");
+                var openTime = document.getElementById("openTime");
+                var closeTime = document.getElementById("closeTime");
+                var description = document.getElementById("description");
+                var shop = { 'name': shopname.value, 'city': city.value, 
+                            'state': state.value, 'zip': zip.value, 
+                            'phone': phone.value, 'openTime': openTime.value,
+                            'closeTime': closeTime.value, 
+                            'description': description.value};         
+                var url='tcss360/shops/';
+                if (confirm('Are you sure - CREATE ' + shopname.value + ' ?')) {
+                  $.ajax({
+                    type: 'POST',
+                    url: url,
+                    datatype: 'json',
+                    data: JSON.stringify(shop),
+                    contentType: 'application/json',
+                    success: render_newshop
+                  }); 
+                }                 
+            }
+            else
+            {
+                // Update an existing record
+                var shopid = document.getElementById("shopid");
+                var shopname = document.getElementById("name");
+                var city = document.getElementById("city");
+                var state = document.getElementById("state");
+                var zip = document.getElementById("zip");
+                var phone = document.getElementById("phone");
+                var openTime = document.getElementById("openTime");
+                var closeTime = document.getElementById("closeTime");
+                var description = document.getElementById("description");
+                var shop = { 'name': shopname.value, 'city': city.value, 
+                            'state': state.value, 'zip': zip.value, 
+                            'phone': phone.value, 'openTime': openTime.value,
+                            'closeTime': closeTime.value, 
+                            'description': description.value};       
+                var url='tcss360/shops/';
+                if (confirm('Are you sure - UPDATE ' + shopname.value + ' ?')) {
+                  $.ajax({
+                    type: 'PUT',
+                    url: url,
+                    datatype: 'json',
+                    data: JSON.stringify(shop),
+                    contentType: 'application/json',
+                    success: render_clear
+                  }); 
+                }                 
+            }
+        });
+        
+        // Dynamic table event handler
+        // 
+        // Gets the selected shop row from the database and puts it
+        // display the shop in the form.  Note, technically we could just
+        // read the static table content but this approach would allow
+        // you to read the entire shop record including fields which may
+        // not be displayed in the HTML table.
+        // 
+        // Use .text() as td doesn't have method .val()
+        // Empty first time as the td has no text until clicked.
+        $(".table-body").on('click', 'tr', function() {
+            var clicked_shopid=$(this).find('td:first').text();
+            old_shopid = clicked_shopid;
+            var url='tcss360/shops/'+clicked_shopid;
+             $.ajax({
+               type: 'GET',
+               url: url,
+               datatype: 'json',
+               success: render_form
+             });        
+         });
+         
+
+        
+        // get and display shops when the form is first loaded
+        getshops();
+        
+    } );
+
+    // gets and displays shops by calling render
+    function getshops() {
+        // Form load
+        var url='tcss360/shops/0';
+
+        $.ajax({
+          type: 'GET',
+          url: url,
+          datatype: 'json',
+          success: render
+        }); 
+    }
+    
+    // gets and displays shops by calling render
+    function getshop() {
+        // Form load
+        var shopid = document.getElementById("shopid"); 
+        var url='tcss360/shops/' + shopid.value;
+
+        $.ajax({
+          type: 'GET',
+          url: url,
+          datatype: 'json',
+          success: render_form
+        }); 
+    }    
+    
+    // renders the shop table
+    function render(data)  {
+      $.each(data, function(index, shop) { 
+          var newrow = "<tr><td id=\"shopid\"" + index + "\">"+ shop.shopid + "</td>";
+          newrow += "<td id=\"name\">" + shop.name + "</td>";
+          newrow += "<td id=\"age\">" + shop.age + "</td></tr>";
+          $('#mybody').append(newrow);
+      });
+    }
+    
+    // clears the table, reloads the shops
+    function render_clear(data)
+    {
+        $('#mybody').empty();
+        getshops();
+    }
+    
+    // clears the table, reloads the shops, clears the shop id textbox
+    function render_delete(data)
+    {
+        $('#mybody').empty();
+        getshops();
+        document.getElementById("shopid").value = "";
+    }
+    
+    // display the shopid of a newly created shop as supplied from the service
+    function render_newshop(data)
+    {
+        $.each(data, function(index, shop) { 
+          document.getElementById("shopid").value = shop.shopid;
+        });
+        document.getElementById("shopid").disabled = false;
+        $('#mybody').empty();
+        getshops();
+    }
+    
+    // displays a selected shop in the form
+    function render_form(data)  {
+      var list = data;
+      if (list)
+        $.each(list, function(index, shop) { 
+            $('#shopid').val(shop.shopid);
+            $('#name').val(shop.name);
+            $('#city').val(shop.city);
+            $('#state').val(shop.state);
+            $('#zip').val(shop.zip);
+            $('#phone').val(shop.phone);
+            $('#openTime').val(shop.openTime;
+            $('#closeTime').val(shop.closeTime);
+            $('#description').val(shop.description);
+        });
+      else
+      {
+        document.getElementById("name").value = "";
+        document.getElementById("city").value = "";
+        document.getElementById("state").value = "";
+        document.getElementById("zip").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("openTime").value = "";
+        document.getElementById("closeTime").value = "";
+        document.getElementById("description").value = "";
+      }
+    }    
+  </script>
+  </head>
+  <body  onload="">
+   <div id="title">
+   User Editor - The Burrito Strikes Back
+   </div>
+   <br>
+   <table id="myform">
+   <tr>
+       <td>
+           <input type="button" value="Get Shop" onclick="" id="get-data"/>
+           <input type="button" value="New Shop" onclick="" id="new-shop"/>
+           <input type="button" value="Save Shop" onclick="" id="save-shop"/>
+           <input type="button" value="Delete Shop" onclick="" id="delete-shop"/>
+       </td>        
+   </tr>
+   <tr>
+       <td>Enter Shop ID :  </td>
+       <td><input type="text" id="shopid" size="10"/>  
+   </tr>
+   <tr>
+       <td>Enter Shop Name :  </td>
+       <td><input type="text" id="name" size="20"/> </td>
+   </tr>
+   <tr>
+       <td>City : </td>
+       <td><input type="text" id="city" size="10"/> </td>
+   </tr>
+    <tr>
+       <td>State : </td>
+       <td><input type="text" id="state" size="10"/> </td>
+   </tr>
+    <tr>
+       <td>Zip Code : </td>
+       <td><input type="text" id="zip" size="10"/> </td>
+   </tr>
+    <tr>
+       <td>Phone : </td>
+       <td><input type="text" id="phone" size="10"/> </td>
+   </tr>
+    <tr>
+       <td>Open : </td>
+       <td><input type="text" id="openTime" size="10"/> </td>
+   </tr>
+    <tr>
+       <td>Close : </td>
+       <td><input type="text" id="closeTime" size="10"/> </td>
+   </tr>
+    <tr>
+       <td>Description : </td>
+       <td><input type="text" id="description" size="10"/> </td>
+   </tr>
+   </table>
+   <br>
+   <table id="mytable" class="table">
+           <thead>
+             <tr class="table-header">
+                 <td class="shopid">Shop Id</td>
+                 <td class="name">Name</td>
+                 <td class="city">City</td>
+                 <td class="state">State</td>
+                 <td class="zip">Zip Code</td>
+                 <td class="phone">phone</td>
+                 <td class="openTime">Open</td>
+                 <td class="closeTime">Close</td>
+                 <td class="description">Description</td>
+             </tr>               
+           </thead>
+           <tbody id="mybody" class="table-body">
+           </tbody>
+   </table>
+  </body>
 </html>
