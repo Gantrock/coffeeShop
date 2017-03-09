@@ -22,7 +22,7 @@
             padding-bottom: 5px;
             padding-right: 20px;
             padding-left: 20px;
-            font-family: sans-serif;
+            font-family: atari;
         }
         #mytable {
             border: 1px solid black;
@@ -31,15 +31,15 @@
             padding-bottom: 5px;
             padding-right: 20px;
             padding-left: 20px;
-            font-family: sans-serif;
+            font-family: atari;
         }
         div {
-            font-family: sans-serif;
+            font-family: sans;
             font-size: xx-large;
             font-weight: bold;
         }
         .table-header {
-          background-color: yellow;
+          background-color: purple;
           border: 1px solid black;
         }
         .shopid {
@@ -64,7 +64,7 @@
           width: 50px;
         }
         .closeTime {
-          width: 500px;
+          width: 50px;
         }
         .description {
           width: 300px;
@@ -78,7 +78,7 @@
           padding-left: 20px;    
         }
     </style>
-    <title>User Editor</title>
+    <title>Shop Editor</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
@@ -278,7 +278,13 @@
       $.each(data, function(index, shop) { 
           var newrow = "<tr><td id=\"shopid\"" + index + "\">"+ shop.shopid + "</td>";
           newrow += "<td id=\"name\">" + shop.name + "</td>";
-          newrow += "<td id=\"age\">" + shop.age + "</td></tr>";
+          newrow += "<td id=\"city\">" + shop.city + "</td></tr>";
+          newrow += "<td id=\"state\">" + shop.state + "</td></tr>";
+          newrow += "<td id=\"zip\">" + shop.zip + "</td></tr>";
+          newrow += "<td id=\"phone\">" + shop.phone + "</td></tr>";
+          newrow += "<td id=\"openTime\">" + shop.openTime + "</td></tr>";
+          newrow += "<td id=\"closeTime\">" + shop.closetime + "</td></tr>";
+          newrow += "<td id=\"description\">" + shop.description + "</td></tr>";
           $('#mybody').append(newrow);
       });
     }
