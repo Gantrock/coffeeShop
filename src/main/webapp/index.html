@@ -141,6 +141,7 @@
         // Clears the form to allow entry of a new shop record
         $('#new-shop').click(function ()
         {
+           document.getElementById("shopid").disabled = true;
            document.getElementById("name").value = "";
            document.getElementById("city").value = "";
            document.getElementById("state").value = "";
@@ -149,7 +150,7 @@
            document.getElementById("openTime").value = "";
            document.getElementById("closeTime").value = "";
            document.getElementById("description").value = "";
-           document.getElementById("shopid").disabled = true;
+           
         });        
 
         // Save-Shop Click function
@@ -189,6 +190,7 @@
             else
             {
                 // Update an existing record
+                var shopid = document.getElementById("shopid");
                 var name = document.getElementById("name");
                 var city = document.getElementById("city");
                 var state = document.getElementById("state");
@@ -196,8 +198,7 @@
                 var phone = document.getElementById("phone");
                 var openTime = document.getElementById("openTime");
                 var closeTime = document.getElementById("closeTime");
-                var description = document.getElementById("description");
-                var shopid = document.getElementById("shopid");
+                var description = document.getElementById("description");             
                 var shop = { 'name': name.value, 'city': city.value, 
                             'state': state.value, 'zip': zip.value, 
                             'phone': phone.value, 'openTime': openTime.value,
@@ -320,6 +321,7 @@
       var list = data;
       if (list)
         $.each(list, function(index, shop) { 
+            $('#shopid').val(shop.shopid);
             $('#name').val(shop.name);
             $('#city').val(shop.city);
             $('#state').val(shop.state);
@@ -328,7 +330,7 @@
             $('#openTime').val(shop.openTime);
             $('#closeTime').val(shop.closeTime);
             $('#description').val(shop.description);
-            $('#shopid').val(shop.shopid);
+            
         });
       else
       {
@@ -399,6 +401,7 @@
    <table id="mytable" class="table">
            <thead>
              <tr class="table-header">
+                 <td class="shopid">Shop Id</td>
                  <td class="name">Name</td>
                  <td class="city">City</td>
                  <td class="state">State</td>
@@ -407,7 +410,7 @@
                  <td class="openTime">Open</td>
                  <td class="closeTime">Close</td>
                  <td class="description">Description</td>
-                 <td class="shopid">Shop Id</td>
+                 
              </tr>               
            </thead>
            <tbody id="mybody" class="table-body">
