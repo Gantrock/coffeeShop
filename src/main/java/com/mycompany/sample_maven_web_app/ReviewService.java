@@ -63,7 +63,7 @@ public class ReviewService {
             Review[] reviews = db.getReviews();
             for (int i=0;i<reviews.length;i++)
                 sb.append("<tr><td>" + reviews[i].getMyContent() + "</td><td>" + reviews[i].getMyDate() 
-                		+ "</td><td>" + reviews[i].getShopId()  + "</td><td>" + reviews[i].getMyWifi()
+                		+ "</td><td>" + reviews[i].getShopid()  + "</td><td>" + reviews[i].getMyWifi()
                 		+ "</td><td>" + reviews[i].getMyCoffee()  + "</td><td>" + reviews[i].getMyFood()
                 		+ "</td><td>" + reviews[i].getMyStudy()  + "</td><td>" + reviews[i].getMyReviewId());
         }
@@ -148,7 +148,7 @@ public class ReviewService {
         text.append("The JSON obj:" + jobj.toString() + "\n");
         text.append("Review:" + review.getMyContent() + "\n");
         text.append("Date:" + localDate + "\n");
-        text.append("Shop ID:" + review.getShopId() + "\n");
+        text.append("Shop ID:" + review.getShopid() + "\n");
         text.append("Wifi:" + review.getMyWifi() + "\n");
         text.append("Coffee:" + review.getMyCoffee() + "\n");
         text.append("Food:" + review.getMyFood() + "\n");

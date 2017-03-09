@@ -159,7 +159,7 @@ public class Model {
         while (rs.next())
             shopid = rs.getInt(9);   // assuming 9th column is userid
         logger.log(Level.INFO, "The new shop id=" + shopid);
-        shp.setShopId(shopid);
+        shp.setShopid(shopid);
         return shp;
     }
     
@@ -182,7 +182,7 @@ public class Model {
 //            logger.log(Level.INFO, "Reading row...");
 //            Shop shp = new Shop();
 //            shp.setName(rows.getString("name"));
-//            shp.setShopId(rows.getInt("shopid"));
+//            shp.setShopid(rows.getInt("shopid"));
 //            shp.setCity(rows.getString("city"));
 //            shp.setState(rows.getString("state"));
 //            shp.setZip(rows.getInt("zip"));
@@ -190,7 +190,7 @@ public class Model {
 //            shp.setOpen(rows.getInt("openTime"));
 //            shp.setClose(rows.getInt("closeTime"));
 //            shp.setDescription(rows.getString("description"));
-//            logger.log(Level.INFO, "Adding shop to list with id=" + shp.getShopId());
+//            logger.log(Level.INFO, "Adding shop to list with id=" + shp.getShopid());
 //            ll.add(shp);
 //        }
 //        return ll.toArray(new Shop[ll.size()]);
@@ -209,7 +209,7 @@ public class Model {
             logger.log(Level.INFO, "Reading row...");
              Shop shp = new Shop();
              shp.setName(rows.getString("name"));
-             shp.setShopId(rows.getInt("shopid"));
+             shp.setShopid(rows.getInt("shopid"));
              shp.setCity(rows.getString("city"));
              shp.setState(rows.getString("state"));
              shp.setZip(rows.getInt("zip"));
@@ -217,7 +217,7 @@ public class Model {
              shp.setOpen(rows.getInt("openTime"));
              shp.setClose(rows.getInt("closeTime"));
              shp.setDescription(rows.getString("description"));
-             logger.log(Level.INFO, "Adding shop to list with id=" + shp.getShopId());
+             logger.log(Level.INFO, "Adding shop to list with id=" + shp.getShopid());
              ll.add(shp);
         }
         return ll.toArray(new Shop[ll.size()]);
@@ -238,7 +238,7 @@ public class Model {
         sqlQuery.append("openTime=" + shp.getOpen() + ",");
         sqlQuery.append("closeTime=" + shp.getClose() + ",");
         sqlQuery.append("description='" + shp.getDescription() + "' ");
-        sqlQuery.append("where shopid=" + shp.getShopId() + ";");
+        sqlQuery.append("where shopid=" + shp.getShopid() + ";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
         return st.execute(sqlQuery.toString());
@@ -250,8 +250,8 @@ public class Model {
     public int newReview(Review rvw) throws SQLException
     {
         LocalDate localDate = LocalDate.now();
-        String sqlInsert="insert into reviews (myContent, myDate, shopId, myWifi, myCoffee, myFood, myStudy) values ('"
-                + rvw.getMyContent() + "','" + localDate + "'," + rvw.getShopId()
+        String sqlInsert="insert into reviews (myContent, myDate, shopid, myWifi, myCoffee, myFood, myStudy) values ('"
+                + rvw.getMyContent() + "','" + localDate + "'," + rvw.getShopid()
                 + ", " + rvw.getMyWifi()  +", " + rvw.getMyCoffee()
                 +", " + rvw.getMyFood() + ", " + rvw.getMyStudy() + ");";
         Statement s = createStatement();
@@ -288,7 +288,7 @@ public class Model {
             Review rvw = new Review();
             rvw.setMyContent(rows.getString("myContent"));
             rvw.setMyDate((rows.getDate("myDate")).toLocalDate());
-            rvw.setShopId(rows.getInt("shopid"));
+            rvw.setShopid(rows.getInt("shopid"));
             rvw.setMyWifi(rows.getInt("myWifi"));
             rvw.setMyCoffee(rows.getInt("myCoffee"));
             rvw.setMyFood(rows.getInt("myFood"));
@@ -307,7 +307,7 @@ public class Model {
         sqlQuery.append("update reviews ");
         sqlQuery.append("set myContent='" + rvw.getMyContent() + "', ");
         sqlQuery.append("myDate='" + localDate + "',");
-        sqlQuery.append("shopid=" + rvw.getShopId() + ",");
+        sqlQuery.append("shopid=" + rvw.getShopid() + ",");
         sqlQuery.append("myWifi=" + rvw.getMyWifi() + ",");
         sqlQuery.append("myCoffee=" + rvw.getMyCoffee() + ",");
         sqlQuery.append("myFood=" + rvw.getMyFood() + ",");

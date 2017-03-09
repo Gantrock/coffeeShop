@@ -90,12 +90,12 @@ public class Shop {
         return description;
     }
 
-    public int getShopId() {
+    public int getShopid() {
         return shopid;
     }
 
-    public void setShopId(int shopId) {
-        this.shopid = shopId;
+    public void setShopid(int shopid) {
+        this.shopid = shopid;
     }
     
     

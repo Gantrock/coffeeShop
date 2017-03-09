@@ -69,7 +69,7 @@ public class ShopService {
 //                		+ "</td><td>" + shops[i].getState()  + "</td><td>" + shops[i].getZip()
 //                		+ "</td><td>" + shops[i].getPhone()  + "</td><td>" + shops[i].getOpen()
 //                		+ "</td><td>" + shops[i].getClose()  + "</td><td>" + shops[i].getDescription()
-//                		 + "</td><td>" + shops[i].getShopId());
+//                		 + "</td><td>" + shops[i].getShopid());
 //        }
 //        catch (Exception e)
 //        {
@@ -84,7 +84,7 @@ public class ShopService {
      @GET
     @Path("{shopid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Shop> getshopsJson(@PathParam("shopid") String id) {
+    public List<Shop> getShopsJson(@PathParam("shopid") String id) {
         LinkedList<Shop> lshops = new LinkedList<Shop>();
      
         try
@@ -124,7 +124,7 @@ public class ShopService {
         StringBuilder text = new StringBuilder();
         try {
             Model db = Model.singleton();
-            int shopid = shop.getShopId();
+            int shopid = shop.getShopid();
             db.updateShop(shop);
             logger.log(Level.INFO, "update shop with shopid=" + shopid);
             text.append("Shop id updated with shop id=" + shopid + "\n");
@@ -153,7 +153,7 @@ public class ShopService {
         StringBuilder text = new StringBuilder();
         try {
             Model db = Model.singleton();
-            int shopid = shop.getShopId();
+            int shopid = shop.getShopid();
             db.deleteShop(shopid);
             logger.log(Level.INFO, "shop deleted from db=" + shopid);
             text.append("Shop id deleted with id=" + shopid);
@@ -238,8 +238,8 @@ public class ShopService {
         try {
             Model db = Model.singleton();
             Shop shp = db.newShop(shop);
-            logger.log(Level.INFO, "shop persisted to db as shopid=" + shp.getShopId());
-            text.append("Shop id persisted with id=" + shp.getShopId());
+            logger.log(Level.INFO, "shop persisted to db as shopid=" + shp.getShopid());
+            text.append("Shop id persisted with id=" + shp.getShopid());
             lshops.add(shp);
         }
         catch (SQLException sqle)
