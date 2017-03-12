@@ -157,7 +157,7 @@ public class Model {
         logger.log(Level.INFO, "retrieved keys from statement");
         int shopid = -1;  
         while (rs.next())
-            shopid = rs.getInt(9);   // assuming 9th column is userid
+            shopid = rs.getInt(10);   // assuming 10th column is userid
         logger.log(Level.INFO, "The new shop id=" + shopid);
         shp.setShopid(shopid);
         return shp;
