@@ -233,12 +233,12 @@ public class Model {
         sqlQuery.append("update shops ");
         sqlQuery.append("set name='" + shp.getName() + "', ");
         sqlQuery.append("set address='" + shp.getAddress() + "', ");
-        sqlQuery.append("city='" + shp.getCity() + "',");
-        sqlQuery.append("state='" + shp.getState() + "',");
-        sqlQuery.append("zip=" + shp.getZip() + ",");
-        sqlQuery.append("phone='" + shp.getPhone() + "',");
-        sqlQuery.append("opentime=" + shp.getOpentime() + ",");
-        sqlQuery.append("closetime=" + shp.getClosetime() + ",");
+        sqlQuery.append("city='" + shp.getCity() + "', ");
+        sqlQuery.append("state='" + shp.getState() + "', ");
+        sqlQuery.append("zip=" + shp.getZip() + ", ");
+        sqlQuery.append("phone='" + shp.getPhone() + "', ");
+        sqlQuery.append("opentime=" + shp.getOpentime() + ", ");
+        sqlQuery.append("closetime=" + shp.getClosetime() + ", ");
         sqlQuery.append("description='" + shp.getDescription() + "' ");
         sqlQuery.append("where shopid=" + shp.getShopid() + ";");
         Statement st = createStatement();
