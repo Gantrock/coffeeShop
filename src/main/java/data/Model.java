@@ -197,11 +197,11 @@ public class Model {
 //    }
 //    
     
-    public Shop[] getShops(int shopid) throws SQLException
+    public Shop[] getShops(int shopId) throws SQLException
     {
         LinkedList<Shop> ll = new LinkedList<Shop>();
         String sqlQuery ="select * from shops";
-        sqlQuery += (shopid > 0) ? " where shopid=" + shopid + " order by shopid;" : " order by shopid;";
+        sqlQuery += (shopId > 0) ? " where shopid=" + shopId + " order by shopid;" : " order by shopid;";
         Statement st = createStatement();
         ResultSet rows = st.executeQuery(sqlQuery);
         while (rows.next())
@@ -217,7 +217,7 @@ public class Model {
              shp.setOpentime(rows.getInt("opentime"));
              shp.setClosetime(rows.getInt("closetime"));
              shp.setDescription(rows.getString("description"));
-             //shp.setShopid(rows.getInt("shopid"));
+             shp.setShopid(rows.getInt("shopid"));
              logger.log(Level.INFO, "Adding shop to list with id=" + shp.getShopid());
              ll.add(shp);
         }
