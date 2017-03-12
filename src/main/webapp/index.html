@@ -288,12 +288,12 @@
           var newrow = "<tr><td id=\"shopid\"" + index + "\">"+ shop.shopid + "</td>";
           newrow += "<td id=\"name\">" + shop.name + "</td>";
           newrow += "<td id=\"address\">" + shop.address + "</td>";
-          newrow += "<td id=\"city\">" + shop.city + "</td></tr>";
-          newrow += "<td id=\"state\">" + shop.state + "</td></tr>";
-          newrow += "<td id=\"zip\">" + shop.zip + "</td></tr>";
-          newrow += "<td id=\"phone\">" + shop.phone + "</td></tr>";
-          newrow += "<td id=\"opentime\">" + shop.opentime + "</td></tr>";
-          newrow += "<td id=\"closetime\">" + shop.closetime + "</td></tr>";
+          newrow += "<td id=\"city\">" + shop.city + "</td>";
+          newrow += "<td id=\"state\">" + shop.state + "</td>";
+          newrow += "<td id=\"zip\">" + shop.zip + "</td>";
+          newrow += "<td id=\"phone\">" + shop.phone + "</td>";
+          newrow += "<td id=\"opentime\">" + shop.opentime + "</td>";
+          newrow += "<td id=\"closetime\">" + shop.closetime + "</td>";
           newrow += "<td id=\"description\">" + shop.description + "</td></tr>";
           $('#mybody').append(newrow);
       });
@@ -425,8 +425,7 @@
                  <td class="phone">Phone</td>
                  <td class="opentime">Open</td>
                  <td class="closetime">Close</td>
-                 <td class="description">Description</td>
-                 
+                 <td class="description">Description</td>    
              </tr>               
            </thead>
            <tbody id="mybody" class="table-body">
