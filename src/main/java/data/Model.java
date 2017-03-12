@@ -232,7 +232,7 @@ public class Model {
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("update shops ");
         sqlQuery.append("set name='" + shp.getName() + "', ");
-        sqlQuery.append("set address='" + shp.getAddress() + "', ");
+        sqlQuery.append("address='" + shp.getAddress() + "', ");
         sqlQuery.append("city='" + shp.getCity() + "', ");
         sqlQuery.append("state='" + shp.getState() + "', ");
         sqlQuery.append("zip=" + shp.getZip() + ", ");
