@@ -14,92 +14,157 @@ import java.util.List;
 public class Shop {
 
     private String name;
+    private String address;
     private String city;
     private String state;
     private long zip;
-    private long phone;
-    private int openTime;
-    private int closeTime;
+    private String phone;
+    private int opentime;
+    private int closetime;
     private String description;
-    
     private int shopid;
 
-
+    /**
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name the name to set
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    /**
+     * @return the city
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * @param city the city to set
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * @return the state
+     */
     public String getState() {
-        return state;   
-    }
-    
-    public void setState(String state) {
-        this.state = state;   
+        return state;
     }
 
+    /**
+     * @param state the state to set
+     */
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    /**
+     * @return the zip
+     */
     public long getZip() {
         return zip;
     }
 
-    public void setZip(int zip) {
+    /**
+     * @param zip the zip to set
+     */
+    public void setZip(long zip) {
         this.zip = zip;
     }
-    public long getPhone() {
+
+    /**
+     * @return the phone
+     */
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    
-    public int getOpen() {
-        return openTime;
+    /**
+     * @return the opentime
+     */
+    public int getOpentime() {
+        return opentime;
     }
 
-    public void setOpen(int openTime) {
-        this.openTime = openTime;
-    }
-    
-    public int getClose() {
-        return closeTime;
+    /**
+     * @param opentime the opentime to set
+     */
+    public void setOpentime(int opentime) {
+        this.opentime = opentime;
     }
 
-    public void setClose(int closeTime) {
-        this.closeTime = closeTime;
+    /**
+     * @return the closetime
+     */
+    public int getClosetime() {
+        return closetime;
     }
-    
 
-    public void setDescription(String description) {
-        this.description = description;
+    /**
+     * @param closetime the closetime to set
+     */
+    public void setClosetime(int closetime) {
+        this.closetime = closetime;
     }
-    
+
+    /**
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * @return the shopid
+     */
     public int getShopid() {
         return shopid;
     }
 
+    /**
+     * @param shopid the shopid to set
+     */
     public void setShopid(int shopid) {
         this.shopid = shopid;
     }
-    
-    
-    
+
+
     
 }
 

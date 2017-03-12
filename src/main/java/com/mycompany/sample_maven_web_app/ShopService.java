@@ -81,7 +81,7 @@ public class ShopService {
 
     
     
-     @GET
+    @GET
     @Path("{shopid}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Shop> getShopsJson(@PathParam("shopid") String id) {
@@ -119,6 +119,9 @@ public class ShopService {
     @Consumes(MediaType.APPLICATION_JSON)
     public String updateShop(String jobj) throws IOException
     {
+        logger.log(Level.INFO, "RECEIVED UPDATE REQUEST FOR:\n");
+        logger.log(Level.INFO, "OBJECT:" + jobj + "\n");
+        
         ObjectMapper mapper = new ObjectMapper();
         Shop shop = mapper.readValue(jobj.toString(), Shop.class);
         StringBuilder text = new StringBuilder();
@@ -148,6 +151,8 @@ public class ShopService {
     @Consumes(MediaType.APPLICATION_JSON)
     public String deleteShop(String jobj) throws IOException
     {
+        logger.log(Level.INFO, "RECEIVED DELETE REQUEST FOR:\n");
+        logger.log(Level.INFO, "OBJECT:" + jobj + "\n");
         ObjectMapper mapper = new ObjectMapper();
         Shop shop = mapper.readValue(jobj.toString(), Shop.class);
         StringBuilder text = new StringBuilder();
@@ -160,7 +165,7 @@ public class ShopService {
         }
         catch (SQLException sqle)
         {
-            String errText = "Error deleteing shop after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error deleting shop after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         }
@@ -227,12 +232,13 @@ public class ShopService {
         StringBuilder text = new StringBuilder();
         text.append("The JSON obj:" + jobj.toString() + "\n");
         text.append("Shop:" + shop.getName() + "\n");
+        text.append("Address:" + shop.getAddress() + "\n");
         text.append("City:" + shop.getCity() + "\n");
         text.append("State:" + shop.getState() + "\n");
         text.append("Zip:" + shop.getZip() + "\n");
         text.append("Phone:" + shop.getPhone() + "\n");
-        text.append("Open:" +shop.getOpen() + "\n");
-        text.append("Close:" +shop.getClose() + "\n");
+        text.append("Open:" +shop.getOpentime() + "\n");
+        text.append("Close:" +shop.getClosetime() + "\n");
         text.append("Description:" +shop.getDescription() + "\n");
         
         try {
