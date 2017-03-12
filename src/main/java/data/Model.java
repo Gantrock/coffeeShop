@@ -217,7 +217,7 @@ public class Model {
              shp.setOpentime(rows.getInt("opentime"));
              shp.setClosetime(rows.getInt("closetime"));
              shp.setDescription(rows.getString("description"));
-             shp.setShopid(rows.getInt("shopid"));
+             //shp.setShopid(rows.getInt("shopid"));
              logger.log(Level.INFO, "Adding shop to list with id=" + shp.getShopid());
              ll.add(shp);
         }
