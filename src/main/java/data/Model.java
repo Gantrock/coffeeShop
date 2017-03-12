@@ -209,7 +209,7 @@ public class Model {
             logger.log(Level.INFO, "Reading row...");
              Shop shp = new Shop();
              shp.setName(rows.getString("name"));
-             shp.setName(rows.getString("address"));
+             shp.setAddress(rows.getString("address"));
              shp.setCity(rows.getString("city"));
              shp.setState(rows.getString("state"));
              shp.setZip(rows.getInt("zip"));
@@ -217,6 +217,7 @@ public class Model {
              shp.setOpentime(rows.getInt("opentime"));
              shp.setClosetime(rows.getInt("closetime"));
              shp.setDescription(rows.getString("description"));
+             shp.setShopid(rows.getInt("shopid"));
              logger.log(Level.INFO, "Adding shop to list with id=" + shp.getShopid());
              ll.add(shp);
         }
