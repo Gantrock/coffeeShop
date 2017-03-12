@@ -84,7 +84,7 @@ public class ShopService {
     @GET
     @Path("{shopid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Shop> getShopsJson(@PathParam("shopid") String id) {
+    public List<Shop> getShopJson(@PathParam("shopid") String id) {
         LinkedList<Shop> lshops = new LinkedList<Shop>();
      
         try
