@@ -197,11 +197,11 @@ public class Model {
 //    }
 //    
     
-    public Shop[] getShops(int shopId) throws SQLException
+    public Shop[] getShops(int shopid) throws SQLException
     {
         LinkedList<Shop> ll = new LinkedList<Shop>();
         String sqlQuery ="select * from shops";
-        sqlQuery += (shopId > 0) ? " where shopid=" + shopId + " order by shopid;" : " order by shopid;";
+        sqlQuery += (shopid > 0) ? " where shopid=" + shopid + " order by shopid;" : " order by shopid;";
         Statement st = createStatement();
         ResultSet rows = st.executeQuery(sqlQuery);
         while (rows.next())
