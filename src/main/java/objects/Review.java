@@ -15,7 +15,7 @@ import java.util.Date;
 public class Review {
     private String myContent;
     private LocalDate myDate;
-    private int reviewId;
+    private int reviewid;
     private int myWifi;
     private int myCoffee;
     private int myFood;
@@ -51,10 +51,10 @@ public class Review {
     }
 
     /**
-     * @return the shopid
+     * @return the reviewid
      */
     public int getReviewId() {
-        return reviewId;
+        return reviewid;
     }
 
     /**
