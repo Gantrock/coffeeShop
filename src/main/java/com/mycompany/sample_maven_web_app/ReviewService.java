@@ -16,13 +16,16 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
-import objects.Review;
+import javax.ws.rs.PathParam;
+import objects.Shop;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  * REST Web Service
