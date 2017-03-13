@@ -50,19 +50,15 @@ public class Review {
         this.myDate = myDate;
     }
 
-    /**
-     * @return the reviewid
-     */
+/*  
     public int getReviewId() {
         return reviewid;
     }
 
-    /**
-     * @param shopid the shopid to set
-     */
+    
     public void setReviewId(int reviewid) {
         this.reviewid = reviewid;
-    }
+    }*/
 
     /**
      * @return the myWifi
