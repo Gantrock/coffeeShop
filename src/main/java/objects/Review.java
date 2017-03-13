@@ -21,6 +21,7 @@ public class Review {
     private int myFood;
     private int myStudy;
     private int myReviewId;
+    private int shopid;
 
     /**
      * @return the myContent
@@ -50,15 +51,15 @@ public class Review {
         this.myDate = myDate;
     }
 
-/*  
-    public int getReviewId() {
+ 
+    public int getShopid() {
         return reviewid;
     }
 
     
-    public void setReviewId(int reviewid) {
+    public void setShopid(int reviewid) {
         this.reviewid = reviewid;
-    }*/
+    }
 
     /**
      * @return the myWifi
