@@ -247,9 +247,7 @@ public class Model {
     }
     
     
-   
-    
-    public int newReview(Review rvw) throws SQLException
+   public Review newReview(Review rvw) throws SQLException
     {
         LocalDate localDate = LocalDate.now();
         String sqlInsert="insert into reviews (myContent, myDate, shopid, myWifi, myCoffee, myFood, myStudy) values ('"
@@ -262,14 +260,37 @@ public class Model {
         logger.log(Level.INFO, "statement executed.  atempting get generated keys");
         ResultSet rs = s.getGeneratedKeys();
         logger.log(Level.INFO, "retrieved keys from statement");
-        int reviewid = -1;
+        int reviewid = -1;  
         while (rs.next())
-            reviewid = rs.getInt(8);   // assuming 8th column is reviewid
+            reviewid = rs.getInt(8);   // assuming 8th column is userid
         logger.log(Level.INFO, "The new review id=" + reviewid);
-        return reviewid;
+        rvw.setMyReviewId(reviewid);
+        return rvw;
     }
     
-    public void deleteReview(int reviewid) throws SQLException
+//    public int newReview(Review rvw) throws SQLException
+//    {
+//        LocalDate localDate = LocalDate.now();
+//        String sqlInsert="insert into reviews (myContent, myDate, shopid, myWifi, myCoffee, myFood, myStudy) values ('"
+//                + rvw.getMyContent() + "','" + localDate + "'," + rvw.getShopid()
+//                + ", " + rvw.getMyWifi()  +", " + rvw.getMyCoffee()
+//                +", " + rvw.getMyFood() + ", " + rvw.getMyStudy() + ");";
+//        Statement s = createStatement();
+//        logger.log(Level.INFO, "attempting statement execute");
+//        s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
+//        logger.log(Level.INFO, "statement executed.  atempting get generated keys");
+//        ResultSet rs = s.getGeneratedKeys();
+//        logger.log(Level.INFO, "retrieved keys from statement");
+//        int reviewid = -1;
+//        while (rs.next())
+//            reviewid = rs.getInt(8);   // assuming 8th column is reviewid
+//        logger.log(Level.INFO, "The new review id=" + reviewid);
+//        return reviewid;
+//    }
+   
+   
+   
+   public void deleteReview(int reviewid) throws SQLException
     {
         String sqlDelete="delete from reviews where reviewid=?";
         PreparedStatement pst = createPreparedStatement(sqlDelete);
@@ -277,13 +298,23 @@ public class Model {
         pst.execute();
     }
     
-    public Review[] getReviews() throws SQLException
+//    public void deleteReview(int reviewid) throws SQLException
+//    {
+//        String sqlDelete="delete from reviews where reviewid=?";
+//        PreparedStatement pst = createPreparedStatement(sqlDelete);
+//        pst.setInt(1, reviewid);
+//        pst.execute();
+//    }
+   
+   
+   
+   public Review[] getReviews(int reviewid) throws SQLException
     {
-        LinkedList<Review> ll = new LinkedList<>();
-        String sqlQuery ="select * from reviews;";
+        LinkedList<Review> ll = new LinkedList<Review>();
+        String sqlQuery ="select * from reviews";
+        sqlQuery += (reviewid > 0) ? " where reviewid=" + reviewid + " order by reviewid;" : " order by reviewid;";
         Statement st = createStatement();
         ResultSet rows = st.executeQuery(sqlQuery);
-        LocalDate localDate = LocalDate.now();
         while (rows.next())
         {
             logger.log(Level.INFO, "Reading row...");
@@ -301,6 +332,34 @@ public class Model {
         }
         return ll.toArray(new Review[ll.size()]);
     }
+    
+//    public Review[] getReviews() throws SQLException
+//    {
+//        LinkedList<Review> ll = new LinkedList<>();
+//        String sqlQuery ="select * from reviews;";
+//        Statement st = createStatement();
+//        ResultSet rows = st.executeQuery(sqlQuery);
+//        LocalDate localDate = LocalDate.now();
+//        while (rows.next())
+//        {
+//            logger.log(Level.INFO, "Reading row...");
+//            Review rvw = new Review();
+//            rvw.setMyContent(rows.getString("myContent"));
+//            rvw.setMyDate((rows.getDate("myDate")).toLocalDate());
+//            rvw.setShopid(rows.getInt("shopid"));
+//            rvw.setMyWifi(rows.getInt("myWifi"));
+//            rvw.setMyCoffee(rows.getInt("myCoffee"));
+//            rvw.setMyFood(rows.getInt("myFood"));
+//            rvw.setMyStudy(rows.getInt("myStudy"));
+//            rvw.setMyReviewId(rows.getInt("reviewid"));;
+//            logger.log(Level.INFO, "Adding review to list with id=" + rvw.getMyReviewId());
+//            ll.add(rvw);
+//        }
+//        return ll.toArray(new Review[ll.size()]);
+//    }
+   
+   
+   
     
     public boolean updateReview(Review rvw) throws SQLException
     {
