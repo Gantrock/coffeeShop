@@ -17,12 +17,16 @@ import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
+import javax.ws.rs.PathParam;
 import objects.Review;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  * REST Web Service
@@ -78,19 +82,19 @@ public class ReviewService {
      @GET
     @Path("{reviewid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Shop> getShopJson(@PathParam("reviewid") String id) {
-        LinkedList<Review> lreview = new LinkedList<Review>();
+    public List<Review> getReviewJson(@PathParam("reviewid") String id) {
+        LinkedList<Review> lreviews = new LinkedList<Review>();
      
         try
         {
-            int review = Integer.parseInt(id);
+            int reviewid = Integer.parseInt(id);
             Model db = Model.singleton();
-            Review[] reviews = db.getReview(reviewid);
+            Review[] reviews = db.getReviews(reviewid);
             if (reviewid ==0)
-                for (int i=0;i<review.length;i++)
-                    lreview.add(reviews[i]);
+                for (int i=0;i<reviews.length;i++)
+                    lreviews.add(reviews[i]);
             else
-                lreview.add(reviews[0]);
+                lreviews.add(reviews[0]);
             logger.log(Level.INFO, "Received request to fetch review id=" + reviewid);
             return lreviews;
         }
