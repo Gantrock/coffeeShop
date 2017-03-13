@@ -15,7 +15,7 @@ import java.util.Date;
 public class Review {
     private String myContent;
     private LocalDate myDate;
-    private int shopid;
+    private int reviewId;
     private int myWifi;
     private int myCoffee;
     private int myFood;
@@ -53,15 +53,15 @@ public class Review {
     /**
      * @return the shopid
      */
-    public int getShopid() {
-        return shopid;
+    public int getReviewId() {
+        return reviewId;
     }
 
     /**
      * @param shopid the shopid to set
      */
-    public void setShopid(int shopid) {
-        this.shopid = shopid;
+    public void setReviewId(int reviewid) {
+        this.reviewid = reviewid;
     }
 
     /**
