@@ -360,7 +360,32 @@
                success: render_form
              });        
          });
+        // Dynamic table event handler
+        // 
+        // Gets the selected review row from the database and puts it
+        // display the review in the form.  Note, technically we could just
+        // read the static table content but this approach would allow
+        // you to read the entire review record including fields which may
+        // not be displayed in the HTML table.
+        // 
+        // Use .text() as td doesn't have method .val()
+        // Empty first time as the td has no text until clicked.
+        $(".table-body").on('click', 'tr', function() {
+            var clicked_reviewid=$(this).find('td:first').text();
+            old_reviewid = clicked_reviewid;
+            var url='tcss360/reviews/'+clicked_reviewid;
+             $.ajax({
+               type: 'GET',
+               url: url,
+               datatype: 'json',
+               success: render_form
+             });        
+         });
          
+
+        
+        // get and display reviews when the form is first loaded
+        getreviews();
 
         
         // get and display shops when the form is first loaded
@@ -469,34 +494,9 @@
       }
     }    
     
-    // Dynamic table event handler
-        // 
-        // Gets the selected review row from the database and puts it
-        // display the review in the form.  Note, technically we could just
-        // read the static table content but this approach would allow
-        // you to read the entire review record including fields which may
-        // not be displayed in the HTML table.
-        // 
-        // Use .text() as td doesn't have method .val()
-        // Empty first time as the td has no text until clicked.
-        $(".table-body").on('click', 'tr', function() {
-            var clicked_reviewid=$(this).find('td:first').text();
-            old_reviewid = clicked_reviewid;
-            var url='tcss360/reviews/'+clicked_reviewid;
-             $.ajax({
-               type: 'GET',
-               url: url,
-               datatype: 'json',
-               success: render_form
-             });        
-         });
-         
-
+    
         
-        // get and display reviews when the form is first loaded
-        getreviews();
-        
-    } );
+   
 
     // gets and displays reviews by calling render
     function getreviews() {
@@ -560,7 +560,7 @@
         $.each(data, function(index, review) { 
           document.getElementById("reviewid").value = review.reviewid;
         });
-        document.getElementById(reviewid").disabled = false;
+        document.getElementById("reviewid").disabled = false;
         $('#mybody').empty();
         getreviews();
     }
