@@ -535,21 +535,21 @@
           newrow += "<td id=\"myFood\">" + review.myFood + "</td>";
           newrow += "<td id=\"myStudy\">" + review.myStudy + "</td>";
           newrow += "<td id=\"myContent\">" + myContent + "</td></tr>";
-          $('#mybody').append(newrow);
+          $('#myReviewBody').append(newrow);
       });
     }
     
     // clears the table, reloads the reviews
     function render_clear(reviewData)
     {
-        $('#mybody').empty();
+        $('#myReviewBody').empty();
         getreviews();
     }
     
     // clears the table, reloads the reviews, clears the review id textbox
     function render_delete(reviewData)
     {
-        $('#mybody').empty();
+        $('#myReviewBody').empty();
         getreviews();
         document.getElementById("reviewid").value = "";
     }
@@ -561,7 +561,7 @@
           document.getElementById("reviewid").value = review.reviewid;
         });
         document.getElementById("reviewid").disabled = false;
-        $('#mybody').empty();
+        $('#myReviewBody').empty();
         getreviews();
     }
     
@@ -666,7 +666,7 @@
            </tbody>
    </table>
    <br>
-   <table id="myform">
+   <table id="myReviewForm">
    <tr>
        <td>
            <input type="button" value="Get Review" onclick="" id="get-review"/>
@@ -705,7 +705,7 @@
    </tr>
    </table>
    <br>
-   <table id="mytable" class="table">
+   <table id="myReviewTable" class="table">
            <thead>
              <tr class="table-header">
                  <td class="reviewid">Review Id</td>
@@ -717,7 +717,7 @@
                  <td class="myContent">Review</td>
              </tr>               
            </thead>
-           <tbody id="mybody" class="table-body">
+           <tbody id="myReviewBody" class="table-body">
            </tbody>
    </table>
   </body>
