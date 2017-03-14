@@ -194,7 +194,21 @@
            document.getElementById("closetime").value = "";
            document.getElementById("description").value = "";
            
-        });        
+        });       
+        
+        // New-Review Click function
+        //
+        // Clears the form to allow entry of a new review record
+        $('#new-review').click(function ()
+        {
+           document.getElementById("reviewid").disabled = true;
+           document.getElementById("shopid").value = "";
+           document.getElementById("myWifi").value = "";
+           document.getElementById("myCoffee").value = "";
+           document.getElementById("myFood").value = "";
+           document.getElementById("myStudy").value = "";
+           document.getElementById("myContent").value = "";
+        });       
 
         // Save-Shop Click function
         //
