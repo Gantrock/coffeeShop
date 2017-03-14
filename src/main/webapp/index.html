@@ -103,6 +103,23 @@
             success: render_form
           });        
         });
+        
+        
+        // Get-Review Click function
+        //
+        // Calls the GET service to lookup a currently entered reviewid
+        $('#get-review').click(function () 
+        {
+          var reviewid = document.getElementById("reviewid");
+          var url='tcss360/reviews/'+reviewid.value;
+
+          $.ajax({
+            type: 'GET',
+            url: url,
+            datatype: 'json',
+            success: render_form
+          });        
+        });
 
         $('#shopid').focusin(function () {
             old_shopid = document.getElementById("shopid").value;    
