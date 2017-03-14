@@ -121,18 +121,17 @@
           });        
         });
 
-        $('#shopid').focusin(function () {
-            old_shopid = document.getElementById("shopid").value;    
+        $('#reviewid').focusin(function () {
+            old_reviewid = document.getElementById("reviewid").value;    
         });
 
-        // If the shop exits the shopid textbox and places focus on another
-        // GUI control on the screen, and if the shop id had changed since
-        // the shop entered the box, then reload the shop form
-        $('#shopid').focusout(function () {
-            var curr_shopid = document.getElementById("shopid").value;    
-            //alert(curr_shopid + '---' + old_shopid)
-            if (curr_shopid != old_shopid)
-                getshop();
+        // If the review exits the reviewid textbox and places focus on another
+        // GUI control on the screen, and if the review id had changed since
+        // the review entered the box, then reload the review form
+        $('#reviewid').focusout(function () {
+            var curr_reviewid = document.getElementById("reviewid").value;    
+            if (curr_reviewid != old_reviewid)
+                getreview();
         });
         
         // Delete-Shop Click function
