@@ -155,6 +155,29 @@
            } 
         });
         
+        
+        
+        // Delete-Review Click function
+        //
+        // Calls the DELETE service to delete the selected review
+        $('#delete-review').click(function ()
+        {
+           var reviewid = document.getElementById("reviewid");
+           var shopid = document.getElementById("shopid");
+           var review = { 'reviewid': reviewid.value };           
+           var url='tcss360/reviews/';
+           if (confirm('Are you sure - DELETE ' + shopid.value + '-(' + reviewid.value + ') ?')) {
+             $.ajax({
+               type: 'DELETE',
+               url: url,
+               datatype: 'json',
+               data: JSON.stringify(review),
+               contentType: 'application/json',
+               success: render_delete
+             }); 
+           } 
+        });
+        
         // New-Shop Click function
         //
         // Clears the form to allow entry of a new shop record
