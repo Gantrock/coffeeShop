@@ -468,6 +468,126 @@
         document.getElementById("description").value = "";
       }
     }    
+    
+    // Dynamic table event handler
+        // 
+        // Gets the selected review row from the database and puts it
+        // display the review in the form.  Note, technically we could just
+        // read the static table content but this approach would allow
+        // you to read the entire review record including fields which may
+        // not be displayed in the HTML table.
+        // 
+        // Use .text() as td doesn't have method .val()
+        // Empty first time as the td has no text until clicked.
+        $(".table-body").on('click', 'tr', function() {
+            var clicked_reviewid=$(this).find('td:first').text();
+            old_reviewid = clicked_reviewid;
+            var url='tcss360/reviews/'+clicked_reviewid;
+             $.ajax({
+               type: 'GET',
+               url: url,
+               datatype: 'json',
+               success: render_form
+             });        
+         });
+         
+
+        
+        // get and display reviews when the form is first loaded
+        getreviews();
+        
+    } );
+
+    // gets and displays reviews by calling render
+    function getreviews() {
+        // Form load
+        var url='tcss360/reviews/0';
+
+        $.ajax({
+          type: 'GET',
+          url: url,
+          datatype: 'json',
+          success: render
+        }); 
+    }
+    
+    // gets and displays reviewss by calling render
+    function getreview() {
+        // Form load
+        var reviewid = document.getElementById("reviewid"); 
+        var url='tcss360/reviews/' + reviewid.value;
+
+        $.ajax({
+          type: 'GET',
+          url: url,
+          datatype: 'json',
+          success: render_form
+        }); 
+    }    
+    
+    // renders the review table
+    function render(data)  {
+      $.each(data, function(index, shop) { 
+          var newrow = "<tr><td id=\"reviewid\"" + index + "\">"+ review.reviewid + "</td>";
+          newrow += "<td id=\"shopid\">" + review.shopid + "</td>";
+          newrow += "<td id=\"myWifi\">" + review.myWifi + "</td>";
+          newrow += "<td id=\"myCoffee\">" + review.myCoffee + "</td>";
+          newrow += "<td id=\"myFood\">" + review.myFood + "</td>";
+          newrow += "<td id=\"myStudy\">" + review.myStudy + "</td>";
+          newrow += "<td id=\"myContent\">" + myContent + "</td></tr>";
+          $('#mybody').append(newrow);
+      });
+    }
+    
+    // clears the table, reloads the reviews
+    function render_clear(data)
+    {
+        $('#mybody').empty();
+        getreviews();
+    }
+    
+    // clears the table, reloads the reviews, clears the review id textbox
+    function render_delete(data)
+    {
+        $('#mybody').empty();
+        getreviews();
+        document.getElementById("reviewid").value = "";
+    }
+    
+    // display the reviewid of a newly created review as supplied from the service
+    function render_newreview(data)
+    {
+        $.each(data, function(index, review) { 
+          document.getElementById("reviewid").value = review.reviewid;
+        });
+        document.getElementById(reviewid").disabled = false;
+        $('#mybody').empty();
+        getreviews();
+    }
+    
+    // displays a selected review in the form
+    function render_form(data)  {
+      var list = data;
+      if (list)
+        $.each(list, function(index, review) { 
+            $('#reviewid').val(review.reviewid);
+            $('#shopid').val(review.shopid);
+            $('#myWifi').val(review.myWifi);
+            $('#myCoffee').val(review.myCoffee);
+            $('#myFood').val(review.myFood);
+            $('#myStudy').val(review.myStudy);
+            $('#myContent').val(review.myContent);
+        });
+      else
+      {
+        document.getElementById("shopid").value = "";
+        document.getElementById("myWifi").value = "";
+        document.getElementById("myCoffee").value = "";
+        document.getElementById("myFood").value = "";
+        document.getElementById("myStudy").value = "";
+        document.getElementById("myCoffee").value = "";
+      }
+    }    
   </script>
   </head>
   <body  onload="">
