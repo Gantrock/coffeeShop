@@ -171,7 +171,7 @@
                type: 'DELETE',
                url: url,
                datatype: 'json',
-               data: JSON.stringify(review),
+               reviewData: JSON.stringify(review),
                contentType: 'application/json',
                success: render_delete
              }); 
@@ -305,7 +305,7 @@
                     type: 'POST',
                     url: url,
                     datatype: 'json',
-                    data: JSON.stringify(review),
+                    reviewData: JSON.stringify(review),
                     contentType: 'application/json',
                     success: render_newreview
                   }); 
@@ -331,7 +331,7 @@
                     type: 'PUT',
                     url: url,
                     datatype: 'json',
-                    data: JSON.stringify(review),
+                    reviewData: JSON.stringify(review),
                     contentType: 'application/json',
                     success: render_clear
                   }); 
@@ -526,8 +526,8 @@
     }    
     
     // renders the review table
-    function render(data)  {
-      $.each(data, function(index, shop) { 
+    function render(reviewData)  {
+      $.each(reviewData, function(index, shop) { 
           var newrow = "<tr><td id=\"reviewid\"" + index + "\">"+ review.reviewid + "</td>";
           newrow += "<td id=\"shopid\">" + review.shopid + "</td>";
           newrow += "<td id=\"myWifi\">" + review.myWifi + "</td>";
@@ -540,14 +540,14 @@
     }
     
     // clears the table, reloads the reviews
-    function render_clear(data)
+    function render_clear(reviewData)
     {
         $('#mybody').empty();
         getreviews();
     }
     
     // clears the table, reloads the reviews, clears the review id textbox
-    function render_delete(data)
+    function render_delete(reviewData)
     {
         $('#mybody').empty();
         getreviews();
@@ -555,9 +555,9 @@
     }
     
     // display the reviewid of a newly created review as supplied from the service
-    function render_newreview(data)
+    function render_newreview(reviewData)
     {
-        $.each(data, function(index, review) { 
+        $.each(reviewData, function(index, review) { 
           document.getElementById("reviewid").value = review.reviewid;
         });
         document.getElementById("reviewid").disabled = false;
@@ -566,8 +566,8 @@
     }
     
     // displays a selected review in the form
-    function render_form(data)  {
-      var list = data;
+    function render_form(reviewData)  {
+      var list = reviewData;
       if (list)
         $.each(list, function(index, review) { 
             $('#reviewid').val(review.reviewid);
