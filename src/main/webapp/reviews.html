@@ -73,7 +73,21 @@ and open the template in the editor.
                  $(document).ready(function () { 
         var old_reviewid = document.getElementById("reviewid").value;
 
+        // Get-Data Click function
+        //
+        // Calls the GET service to lookup a currently entered reviewid
+        $('#get-data').click(function () 
+        {
+          var reviewid = document.getElementById("reviewid");
+          var url='tcss360/reviews/'+reviewid.value;
 
+          $.ajax({
+            type: 'GET',
+            url: url,
+            datatype: 'json',
+            success: render_form
+          });        
+        });
         
         // Get-Review Click function
         //
@@ -98,18 +112,18 @@ and open the template in the editor.
         });
 
 
-        $('#reviewid').focusin(function () {
-            old_reviewid = document.getElementById("reviewid").value;    
-        });
-
-        // If the review exits the reviewid textbox and places focus on another
-        // GUI control on the screen, and if the review id had changed since
-        // the review entered the box, then reload the review form
-        $('#reviewid').focusout(function () {
-            var curr_reviewid = document.getElementById("reviewid").value;    
-            if (curr_reviewid != old_reviewid)
-                getreview();
-        });
+//        $('#reviewid').focusin(function () {
+//            old_reviewid = document.getElementById("reviewid").value;    
+//        });
+//
+//        // If the review exits the reviewid textbox and places focus on another
+//        // GUI control on the screen, and if the review id had changed since
+//        // the review entered the box, then reload the review form
+//        $('#reviewid').focusout(function () {
+//            var curr_reviewid = document.getElementById("reviewid").value;    
+//            if (curr_reviewid != old_reviewid)
+//                getreview();
+//        });
 
 
 
@@ -332,7 +346,7 @@ and open the template in the editor.
         document.getElementById("myCoffee").value = "";
         document.getElementById("myFood").value = "";
         document.getElementById("myStudy").value = "";
-        document.getElementById("myCoffee").value = "";
+        document.getElementById("myContent").value = "";
       }
     }       
         </script>
