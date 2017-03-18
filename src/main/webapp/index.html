@@ -350,6 +350,11 @@
   </script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
+             $(document).ready(function () { 
+        var old_reviewid = document.getElementById("reviewid").value;
+
+
+        
         // Get-Review Click function
         //
         // Calls the GET service to lookup a currently entered reviewid
@@ -511,6 +516,8 @@
         
         // get and display reviews when the form is first loaded
         getreviews();
+     } );
+
     // gets and displays reviews by calling render
     function getreviews() {
         // Form load
@@ -600,8 +607,8 @@
         document.getElementById("myStudy").value = "";
         document.getElementById("myCoffee").value = "";
       }
-    }    
-    </script>    
+    }       
+    </script>
   </head>
   <body  onload="">
    <div id="title">
