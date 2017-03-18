@@ -90,6 +90,13 @@ and open the template in the editor.
             success: render_form
           });        
         });
+        
+        $('#get-shops').click(function () 
+        {
+          window.location.href = 'https://sheltered-earth-81944.herokuapp.com/index.html';
+                 
+        });
+
 
         $('#reviewid').focusin(function () {
             old_reviewid = document.getElementById("reviewid").value;    
@@ -338,6 +345,7 @@ and open the template in the editor.
            <input type="button" value="New Review" onclick="" id="new-review"/>
            <input type="button" value="Save Review" onclick="" id="save-review"/>
            <input type="button" value="Delete Review" onclick="" id="delete-review"/>
+           <input type="button" value="Reviews" onclick="" id="get-shops"/>
        </td>        
    </tr>
    <tr>
