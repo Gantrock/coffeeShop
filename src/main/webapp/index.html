@@ -113,6 +113,12 @@ $(document).ready(function(){
         });
        
        
+       $('#get-reviews').click(function () 
+        {
+          window.location.href = 'https://sheltered-earth-81944.herokuapp.com/reviews.html';
+          });        
+        });
+       
         // Delete-Shop Click function
         //
         // Calls the DELETE service to delete the selected shop
@@ -372,7 +378,7 @@ $(document).ready(function(){
            <input type="button" value="New Shop" onclick="" id="new-shop"/>
            <input type="button" value="Save Shop" onclick="" id="save-shop"/>
            <input type="button" value="Delete Shop" onclick="" id="delete-shop"/>
-           <input type="button" value="Update db" onclick="" id="update-db"/>
+           <input type="button" value="Reviews" onclick="" id="get-reviews"/>
        </td>        
    </tr>
    <tr>
